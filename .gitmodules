@@ -1,0 +1,3 @@
+[submodule "ext/mruby"]
+	path = ext/mruby
+	url = ../../mruby/mruby
