@@ -1,0 +1,1 @@
+This "code structure" is my initial concept from 2015. While many things are changing (e.g., "common" folders that split the C++-code even finer [common-mpc-sp, common-mps-sp,...]), the general idea might not change at all.

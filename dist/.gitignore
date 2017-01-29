@@ -1,0 +1,9 @@
+#folder produced by cmake:
+lib/
+#executables produced:
+jumpfree-mpc-default
+jumpfree-mpc-default.exe
+jumpfree-mps-default
+jumpfree-mps-default.exe
+jumpfree-sp-default
+jumpfree-sp-default.exe

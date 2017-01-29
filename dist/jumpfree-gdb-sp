@@ -1,0 +1,5 @@
+#!/bin/sh
+# Start script for jumpfree on linux (and possibly other unixoids).
+
+cd "$(dirname "$(which $0)")"
+LD_LIBRARY_PATH="$LD_LIBRARY_PATH ./liba" gdb ./jumpfree-sp-default

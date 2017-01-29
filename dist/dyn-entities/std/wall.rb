@@ -1,0 +1,2 @@
+class Wall < PersistentEntity
+end

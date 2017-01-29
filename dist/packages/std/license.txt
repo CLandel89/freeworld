@@ -1,0 +1,5 @@
+All media files in this standard jumpfree package are either licensed under a Creative Commons license or in the public domain. Some files were made by myself (especially the music), some downloaded. Links to sources of downloaded files are provided in their respective folders in files called "license.txt", however experience shows that links may become invalid over time. Content that I created is also listed in those files, with respective license notice.
+Titan, 2013
+
+Regarding work marked with "cc-by-sa":
+This work is licensed under the Creative Commons Attribution-ShareAlike 3.0 Unported License. To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/3.0/ or send a letter to Creative Commons, 444 Castro Street, Suite 900, Mountain View, California, 94041, USA.

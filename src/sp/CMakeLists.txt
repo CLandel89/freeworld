@@ -1,0 +1,16 @@
+cmake_minimum_required(VERSION 2.6)
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
+
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -lmruby -lm -L../../ext/mruby/build/host-debug/lib/")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I../../ext/mruby/include/")
+
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "../../dist/lib/")
+
+add_library(
+    "jumpfree-sp"
+    SHARED
+    "sp.cpp"
+)

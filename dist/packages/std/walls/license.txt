@@ -1,0 +1,3 @@
+The images in this folder (not subfolders) are licensed as follows:
+
+funce_grey_ugly.jpg: cc-by-sa (if not subject to public domain)
