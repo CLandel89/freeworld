@@ -7,9 +7,9 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -lboost_filesystem -lboost_regex")
 #freeworld-impl (sdl variant) depends on this:
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -lSDL2 -lSDL2_image -lSDL2_gfx")
-set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -L../../../../dist/lib/")
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -L${PROJECT_SOURCE_DIR}/dist/lib/")
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -lfreeworld-sp -lfreeworld-common -lfreeworld-common-mpc-sp -lfreeworld-common-mps-sp -lfreeworld-sdl")
-set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -ldl -lmruby -lm -L../../../../ext/mruby/build/host/lib/")
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -ldl -lmruby -lm -L${PROJECT_SOURCE_DIR}/ext/mruby/build/host/lib/")
 
 add_executable (
     "freeworld-sp-default"
@@ -20,7 +20,7 @@ set_target_properties(
     "freeworld-sp-default"
     PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY
-    "../../../../dist/"
+    "${PROJECT_SOURCE_DIR}/dist/"
 )
 
 #this makes sure that the exe depends on the freeworld libs
