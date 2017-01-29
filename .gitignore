@@ -14,3 +14,7 @@ Freeworld.includes
 #generated when exported to Eclipse CDT project (cmake -G ...)
 .cproject
 .project
+.ninja_deps
+.ninja_log
+build.ninja
+rules.ninja
