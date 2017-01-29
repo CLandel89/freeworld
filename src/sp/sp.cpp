@@ -16,9 +16,9 @@
 #include "../common-mps-sp/load_vm.h"
 #include "../common-mps-sp/core_utils.h"
 
-namespace Jumpfree { namespace Sp {
+namespace Freeworld { namespace Sp {
 
-Jumpfree::Common::MiParser miParser;
+Freeworld::Common::MiParser miParser;
 
 mrb_state* vm;
 
@@ -28,14 +28,14 @@ void init_ci_poller(mrb_state * vm);
 mrb_value poll_ci (mrb_state* state, mrb_value value);
 
 void start(std::string save, std::vector<std::string> vm_pkgs, std::vector<std::string> media_pkgs) {
-	Jumpfree::Impl::init();
+	Freeworld::Impl::init();
 	vm = mrb_open();
-	Jumpfree::Common::CoreUtils::init(vm);
+	Freeworld::Common::CoreUtils::init(vm);
 	init_mi_parser(vm);
 	init_ci_poller(vm);
-	Jumpfree::Common::load_vm(vm, vm_pkgs);
+	Freeworld::Common::load_vm(vm, vm_pkgs);
 	for (auto iter = media_pkgs.begin(); iter!=media_pkgs.end(); iter++) {
-		Jumpfree::Common::get_package_manager()->load(*iter);
+		Freeworld::Common::get_package_manager()->load(*iter);
 	}
 	//instruct module to start
 	mrb_load_string(vm, ("start_instance_sp '" + save + "'").c_str());
@@ -43,7 +43,7 @@ void start(std::string save, std::vector<std::string> vm_pkgs, std::vector<std::
 
 void stop() {
 	mrb_close(vm);
-	Jumpfree::Impl::quit();
+	Freeworld::Impl::quit();
 }
 
 void init_mi_parser(mrb_state* vm) {
@@ -70,11 +70,11 @@ void init_ci_poller(mrb_state* vm) {
 }
 
 mrb_value poll_ci (mrb_state* vm, mrb_value value) {
-	Jumpfree::Impl::InputEvent ie;
-	if (Jumpfree::Impl::poll_event(&ie)) {
+	Freeworld::Impl::InputEvent ie;
+	if (Freeworld::Impl::poll_event(&ie)) {
 		return mrb_str_new(vm, (char*)&ie, 8);
 	}
 	return mrb_str_new(vm, NULL, 0);
 }
 
-} } //end of Jumpfree::Sp
+} } //end of Freeworld::Sp

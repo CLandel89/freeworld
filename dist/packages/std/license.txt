@@ -1,4 +1,4 @@
-All media files in this standard jumpfree package are either licensed under a Creative Commons license or in the public domain. Some files were made by myself (especially the music), some downloaded. Links to sources of downloaded files are provided in their respective folders in files called "license.txt", however experience shows that links may become invalid over time. Content that I created is also listed in those files, with respective license notice.
+All media files in this standard freeworld package are either licensed under a Creative Commons license or in the public domain. Some files were made by myself (especially the music), some downloaded. Links to sources of downloaded files are provided in their respective folders in files called "license.txt", however experience shows that links may become invalid over time. Content that I created is also listed in those files, with respective license notice.
 Titan, 2013
 
 Regarding work marked with "cc-by-sa":

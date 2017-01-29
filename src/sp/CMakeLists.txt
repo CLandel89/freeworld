@@ -10,7 +10,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I../../ext/mruby/include/")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "../../dist/lib/")
 
 add_library(
-    "jumpfree-sp"
+    "freeworld-sp"
     SHARED
     "sp.cpp"
 )

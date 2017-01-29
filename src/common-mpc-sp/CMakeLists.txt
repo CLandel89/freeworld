@@ -7,7 +7,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "../../dist/lib/")
 
 add_library (
-    "jumpfree-common-mpc-sp"
+    "freeworld-common-mpc-sp"
     SHARED
     "handle_mi.cpp"
     "package_manager.cpp"

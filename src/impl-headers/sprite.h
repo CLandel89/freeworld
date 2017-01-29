@@ -1,7 +1,7 @@
 #ifndef SPRITE_H
 #define SPRITE_H
 
-namespace Jumpfree { namespace Impl {
+namespace Freeworld { namespace Impl {
 
 class SpritePrivate;
 
@@ -13,6 +13,6 @@ public:
 	void draw (int32_t x, int32_t y);
 };
 
-} } //end of namespace Jumpfree::Impl
+} } //end of namespace Freeworld::Impl
 
 #endif //SPRITE_H

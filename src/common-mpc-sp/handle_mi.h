@@ -7,10 +7,10 @@
 #ifndef HANDLE_MI_H
 #define HANDLE_MI_H
 
-namespace Jumpfree { namespace Common {
+namespace Freeworld { namespace Common {
 
-using Jumpfree::Impl::Sprite;
-using Jumpfree::Impl::Wall;
+using Freeworld::Impl::Sprite;
+using Freeworld::Impl::Wall;
 
 class MiParser
 {
@@ -39,6 +39,6 @@ public:
 	void parse_mi (int length, uint8_t* data);
 };
 
-} } //end of namespace Jumpfree::Common
+} } //end of namespace Freeworld::Common
 
 #endif //HANDLE_MI_H

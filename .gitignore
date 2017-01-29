@@ -5,11 +5,11 @@ Makefile
 cmake_install.cmake
 
 #generated when imported with QT Creator:
-Jumpfree.config
-Jumpfree.creator
-Jumpfree.creator.user
-Jumpfree.files
-Jumpfree.includes
+Freeworld.config
+Freeworld.creator
+Freeworld.creator.user
+Freeworld.files
+Freeworld.includes
 
 #generated when exported to Eclipse CDT project (cmake -G ...)
 .cproject

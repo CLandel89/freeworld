@@ -7,7 +7,7 @@
 
 #include "../common/utils.h"
 
-namespace Jumpfree { namespace Common {
+namespace Freeworld { namespace Common {
 
 void PackageManager::load(std::string name) {
 	boost::filesystem::path path("packages/" + name);
@@ -27,7 +27,7 @@ void PackageManager::rec_load(boost::filesystem::path path) {
 			rec_load(*iter);
 		else
 		{
-			auto hash = Jumpfree::Common::string_hash(filename);
+			auto hash = Freeworld::Common::string_hash(filename);
 			fn[hash] = filename;
 		}
 	}
@@ -50,4 +50,4 @@ PackageManager* get_package_manager() {
 	return &packageManager;
 }
 
-} } // end of namespace Jumpfree::Common
+} } // end of namespace Freeworld::Common

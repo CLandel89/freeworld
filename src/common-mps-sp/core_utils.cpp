@@ -15,7 +15,7 @@
 
 #include "../common/utils.h"
 
-namespace Jumpfree { namespace Common { namespace CoreUtils {
+namespace Freeworld { namespace Common { namespace CoreUtils {
 
 mrb_value add_enum (mrb_state* vm, mrb_value self);
 mrb_value sleep (mrb_state* vm, mrb_value self);
@@ -74,9 +74,9 @@ mrb_value sleep (mrb_state* vm, mrb_value self) {
 mrb_value string_hash_func (mrb_state* vm, mrb_value self) {
 	mrb_value result, arg;
 	mrb_get_args(vm, "S", &arg);
-	result.value.i = Jumpfree::Common::string_hash(mrb_str_to_cstr(vm, arg));
+	result.value.i = Freeworld::Common::string_hash(mrb_str_to_cstr(vm, arg));
 	result.tt = MRB_TT_FIXNUM;
 	return result;
 }
 
-} } } // end of namespace Jumpfree::Common::CoreUtils
+} } } // end of namespace Freeworld::Common::CoreUtils

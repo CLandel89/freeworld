@@ -16,7 +16,7 @@
 #include "../../impl-headers/video.h"
 #include "../../impl-headers/wall.h"
 
-namespace Jumpfree { namespace Impl {
+namespace Freeworld { namespace Impl {
 
 SDL_Window* window;
 SDL_Surface* window_surf;
@@ -42,7 +42,7 @@ int32_t encode_f (float f) {
 
 void init() {
 	SDL_Init(SDL_INIT_EVERYTHING);
-	window = SDL_CreateWindow("Jumpfree", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, window_w, window_h, SDL_WINDOW_OPENGL);
+	window = SDL_CreateWindow("Freeworld", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, window_w, window_h, SDL_WINDOW_OPENGL);
 	window_surf = SDL_GetWindowSurface(window);
 	window_px_form = window_surf->format;
 	IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG);
@@ -163,7 +163,7 @@ public:
 };
 Sprite::Sprite(int32_t id) {
 	priv = new SpritePrivate();
-	std::string fn = Jumpfree::Common::get_package_manager()->fn_for_hash(id);
+	std::string fn = Freeworld::Common::get_package_manager()->fn_for_hash(id);
 	if (fn.empty()) {
 		priv->img = NULL;
 		return;
@@ -202,7 +202,7 @@ public:
 };
 Wall::Wall(int32_t id) {
 	priv = new WallPrivate();
-	std::string fn = Jumpfree::Common::get_package_manager()->fn_for_hash(id);
+	std::string fn = Freeworld::Common::get_package_manager()->fn_for_hash(id);
 	if (fn.empty()) {
 		priv->img = NULL;
 		return;
@@ -291,4 +291,4 @@ void fill_rect(int32_t x, int32_t y, int32_t w, int32_t h, uint8_t r, uint8_t g,
 	SDL_FillRect(window_surf, &dstrect, SDL_MapRGB(window_px_form, r, g, b));
 }
 
-} } //end of namespace Jumpfree:Impl
+} } //end of namespace Freeworld:Impl

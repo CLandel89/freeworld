@@ -8,7 +8,7 @@
 #include "../impl-headers/video.h"
 #include "../impl-headers/wall.h"
 
-namespace Jumpfree { namespace Common {
+namespace Freeworld { namespace Common {
 
 void* raw; //temporary variable
 
@@ -98,10 +98,10 @@ void MiParser::parse_mi (int length, uint8_t* data) {
 		if (type == Mi::SET_RESOLUTION) {
 			READ_I32_OR_RESET(w)
 			READ_I32_OR_RESET(h)
-			Jumpfree::Impl::set_resolution(w, h);
+			Freeworld::Impl::set_resolution(w, h);
 		}
 		else if (type == Mi::FRAME_COMPLETED) {
-			Jumpfree::Impl::frame_completed();
+			Freeworld::Impl::frame_completed();
 		}
 		else if (type == Mi::FILL_RECT) {
 			READ_I32_OR_RESET(x)
@@ -111,7 +111,7 @@ void MiParser::parse_mi (int length, uint8_t* data) {
 			READ_U8_OR_RESET(r)
 			READ_U8_OR_RESET(g)
 			READ_U8_OR_RESET(b)
-			Jumpfree::Impl::fill_rect(x,y,w,h, r,g,b);
+			Freeworld::Impl::fill_rect(x,y,w,h, r,g,b);
 		}
 		else if (type == Mi::SPRITE) {
 			READ_I32_OR_RESET(id)
@@ -154,4 +154,4 @@ void MiParser::parse_mi (int length, uint8_t* data) {
 	current_data_length = 0;
 }
 
-} } //end of namespace Jumpfree::Common
+} } //end of namespace Freeworld::Common

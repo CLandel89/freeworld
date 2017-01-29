@@ -1,7 +1,7 @@
 #ifndef INPUT_H
 #define INPUT_H
 
-namespace Jumpfree { namespace Impl {
+namespace Freeworld { namespace Impl {
 
 enum CiType {
 #include "../../dist/enums/ci_type.enum"
@@ -21,6 +21,6 @@ typedef struct {
  *  false if there are no input events pending. */
 bool poll_event(InputEvent* event);
 
-} } //end of namespace Jumpfree::Impl
+} } //end of namespace Freeworld::Impl
 
 #endif //INPUT_H

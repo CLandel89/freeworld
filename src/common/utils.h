@@ -3,10 +3,10 @@
 
 #include <string>
 
-namespace Jumpfree { namespace Common {
+namespace Freeworld { namespace Common {
 
 int32_t string_hash (std::string str);
 
-} } // end of namespace Jumpfree::Common
+} } // end of namespace Freeworld::Common
 
 #endif //UTILS_H

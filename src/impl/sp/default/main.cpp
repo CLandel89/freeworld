@@ -5,6 +5,6 @@ int main(int argc, const char** args)
 {
 	std::vector<std::string> pkgs;
 	pkgs.push_back("std");
-	Jumpfree::Sp::start("asdf", pkgs, pkgs);
-	Jumpfree::Sp::stop();
+	Freeworld::Sp::start("asdf", pkgs, pkgs);
+	Freeworld::Sp::stop();
 }

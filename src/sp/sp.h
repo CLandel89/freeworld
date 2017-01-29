@@ -4,11 +4,11 @@
 #include <string>
 #include <vector>
 
-namespace Jumpfree { namespace Sp {
+namespace Freeworld { namespace Sp {
 
 void start(std::string save, std::vector<std::string> vm_pkgs, std::vector<std::string> media_pkgs);
 void stop();
 
-} } //end of Jumpfree::Sp
+} } //end of Freeworld::Sp
 
 #endif //SP_H

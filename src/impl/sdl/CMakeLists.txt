@@ -9,7 +9,7 @@ set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -lSDL2 -lSDL2_image -lSDL2
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "../../../dist/lib")
 
 add_library(
-    "jumpfree-sdl"
+    "freeworld-sdl"
     SHARED
     "sdl.cpp"
 )
