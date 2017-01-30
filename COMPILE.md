@@ -7,12 +7,12 @@ To compile, you need the following libs:
 Please make sure to use sane sources. E.g., on Debian, you would use `apt-get install libsdl2-dev`. On Windows, you would download the packages from their authors and - W.I.P. - integrate them into my project.
 
 ## mruby
-Since mruby is needed and not packaged (yet), it needs to be fetched from GitHub:
+Since I'd like to stick to a specific version of mruby, it is included as a git submodule. To fetch it, execute the following in the project root dir (Windows users might need to use 'open git bash shell here' or similar from the context menu in the file browser):
 ```
 git submodule init
 git submodule update
 ```
-Try to compile mruby:
+Then try to compile mruby:
 ```
 cd ext/mruby
 ./minirake
