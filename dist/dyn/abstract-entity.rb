@@ -10,15 +10,15 @@ class AbstractEntity
   end
 
   def sprite pkg, fn
-    return CoreUtils.string_hash('packages/' + pkg + '/sprites/' + fn + '.png')
+    CoreUtils.string_hash 'packages/' + pkg + '/sprites/' + fn + '.png'
   end
 
   def wall pkg, fn
-    return CoreUtils.string_hash('packages/' + pkg + '/walls/' + fn + '.jpg')
+    CoreUtils.string_hash 'packages/' + pkg + '/walls/' + fn + '.jpg'
   end
 
   def wall_png pkg, fn
-    return CoreUtils.string_hash('packages/' + pkg + '/walls/' + fn + '.png')
+    CoreUtils.string_hash 'packages/' + pkg + '/walls/' + fn + '.png'
   end
 
 end
