@@ -2,7 +2,7 @@ class InstanceSp < Instance
   attr_reader :players
   def initialize
     super
-    player = Player.new
+    player = Player.new 0,0,100,200
     @players = [player]
   end
 end

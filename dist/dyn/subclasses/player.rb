@@ -3,8 +3,8 @@ class Player < AbstractEntity
   attr_accessor :button
   attr_reader :graphics
 
-  def initialize
-    super
+  def initialize x,y,w,h
+    super x,y,w,h
     @graphics = Graphics.new
     @control = Control.new self
     @sprite_id = sprite "std", "test"

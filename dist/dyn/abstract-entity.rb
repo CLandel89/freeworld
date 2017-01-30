@@ -3,10 +3,10 @@ class AbstractEntity
   attr_accessor :sprite_id, :wall_id
   attr_accessor :x, :y, :w, :h
 
-  def initialize
+  def initialize x,y,w,h
     @sprite_id = nil
     @wall_id = nil
-    @x, @y, @w, @h = 0, 0, 100, 100
+    @x,@y,@w,@h = x,y,w,h
   end
 
   def sprite pkg, fn
