@@ -1,7 +1,7 @@
 class AbstractEntity
 
-  attr_reader :sprite_id, :wall_id
-  attr_reader :x, :y, :w, :h
+  attr_accessor :sprite_id, :wall_id
+  attr_accessor :x, :y, :w, :h
 
   def initialize
     @sprite_id = nil
