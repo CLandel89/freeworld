@@ -9,16 +9,19 @@ class AbstractEntity
     @x,@y,@w,@h = x,y,w,h
   end
 
-  def sprite pkg, fn
+  def self.sprite pkg, fn
     CoreUtils.string_hash 'packages/' + pkg + '/sprites/' + fn + '.png'
   end
+  def sprite pkg,fn; AbstractEntity.sprite pkg,fn; end
 
-  def wall pkg, fn
-    CoreUtils.string_hash 'packages/' + pkg + '/walls/' + fn + '.jpg'
-  end
-
-  def wall_png pkg, fn
+  def self.wall pkg, fn
     CoreUtils.string_hash 'packages/' + pkg + '/walls/' + fn + '.png'
   end
+  def wall pkg,fn; AbstractEntity.wall pkg,fn; end
+
+  def self.wall_jpg pkg, fn
+    CoreUtils.string_hash 'packages/' + pkg + '/walls/' + fn + '.jpg'
+  end
+  def wall_jpg pkg,fn; AbstractEntity.wall_jpg pkg,fn; end
 
 end
