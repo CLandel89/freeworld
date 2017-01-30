@@ -55,6 +55,7 @@ void rec_load(mrb_state* vm, boost::filesystem::path path)
 #endif
 			FILE* script_file = fopen (iter->path().c_str(), "r");
 			mrb_load_file(vm, script_file);
+			fclose(script_file);
 		}
 	}
 
