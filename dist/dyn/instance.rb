@@ -7,6 +7,8 @@ class Instance
     @players = []
     @chunks = []
     @entity_layer_list
+    #reference globally
+    $instance = self
   end
 
   def action
