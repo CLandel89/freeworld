@@ -26,8 +26,16 @@ class Graphics
   #functions that generate media instructions (MI)
 
   def draw entity
-    sprite_id = entity.sprite_id
+    if entity.respond_to? :draw
+      entity.draw self
+      return
+    end
     x,y,w,h = (x_to_screen entity.x), (y_to_screen entity.y), entity.w, entity.h
+    wall_id = entity.wall_id
+    if wall_id!=nil
+      draw_wall_raw wall_id, x,y,w,h, entity.offset_x,entity.offset_y
+    end
+    sprite_id = entity.sprite_id
     if sprite_id!=nil
       draw_sprite_raw sprite_id, x, y, w, h
     end

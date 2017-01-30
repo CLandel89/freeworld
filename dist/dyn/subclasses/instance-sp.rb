@@ -16,6 +16,12 @@ def start_instance_sp save
   #draw test sprite
   g.draw p
   #draw test walls
+  wp = 'std'
+  wn = 'nonexistent'
+  w1 = Wall.new_jpg(-50,-50,20,300, wp,wn)
+  w2 = Wall.new_jpg(-50,250,200,20, wp,wn)
+  w3 = Wall.new_jpg(130,-50,20,300, wp,wn)
+  g.draw w1; g.draw w2; g.draw w3
   #send to sp implementation
   g.complete_frame
   CoreUtils.sleep 2
