@@ -1,4 +1,6 @@
 #include <string>
+//TODO: don't use std::exit here!!
+#include <cstdlib>
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_keycode.h>
@@ -73,6 +75,10 @@ bool poll_event(InputEvent* event) {
 	if (! SDL_PollEvent(&ev))
 		return false;
 	switch (ev.type) {
+	case SDL_QUIT:
+		//TODO: find a sane way to implement this
+		std::exit(0);
+		break;
 	case SDL_KEYDOWN:
 		event->type = CiType::PRESS;
 		if (ev.key.keysym.sym == jump)
