@@ -82,6 +82,8 @@ bool poll_event(InputEvent* event) {
 		std::exit(0);
 		break;
 	case SDL_KEYDOWN:
+		if (ev.key.repeat!=0)
+			return poll_event(event);
 		event->type = CiType::PRESS;
 		if (ev.key.keysym.sym == jump)
 			event->value = CiButton::JUMP;
@@ -116,9 +118,11 @@ bool poll_event(InputEvent* event) {
 		else if (ev.key.keysym.sym == d)
 			event->value = CiButton::D;
 		else
-			return false;
+			return poll_event(event);
 		return true;
 	case SDL_KEYUP:
+		if (ev.key.repeat!=0)
+			return poll_event(event);
 		event->type = CiType::RELEASE;
 		if (ev.key.keysym.sym == jump)
 			event->value = CiButton::JUMP;
@@ -157,10 +161,10 @@ bool poll_event(InputEvent* event) {
 		else if (ev.key.keysym.sym == d)
 			event->value = CiButton::D;
 		else
-			return false;
+			return poll_event(event);
 		return true;
 	}
-	return false;
+	return poll_event(event);
 }
 
 // S P R I T E
