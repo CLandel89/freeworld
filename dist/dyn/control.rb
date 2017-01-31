@@ -8,35 +8,27 @@ class Control
   def initialize player
     @player = player
     @a_x, @a_y = 0.0, 0.0
-    #@b = Hash.new CiType::RELEASE
-    @b = Hash.new
-    @b.default=CiType::RELEASE
+    @b = Hash.new CiType::RELEASE
   end
 
   def action
     #a poll is either 8 bytes (2 variables) or empty
     while (ci = poll_ci) != '' do
-      ci_type = 0
-      ci_value = 0
-#      n=0; while n<4 do
-#        ci_type |= ci[n].to_i << (n*8)
-#        ci_value |= ci[n+4].to_i << (n*8)
-#        n = n + 1
-#      end
-      if ci_type == CiType::PRESSED || ci_type == CiType::RELEASED
+      ci_type = ci[0].ord | (ci[1].ord << 8) | (ci[2].ord << 16) | (ci[3].ord << 24)
+      ci_value = ci[4].ord | (ci[5].ord << 8) | (ci[6].ord << 16) | (ci[7].ord << 24)
+      case ci_type
+      when CiType::PRESS, CiType::RELEASE
         @b[ci_value] = ci_type
-      end
-      if ci_type == CiType::AXIS_X
+      when CiType::AXIS_X
         @a_x = decode_f ci_value
-      end
-      if ci_type == CiType::AXIS_Y
+      when CiType::AXIS_Y
         @a_y = decode_f ci_value
       end
     end
   end
 
   def decode_f num
-    return (num*65536).to_i
+    return num.to_f / 65536.0
   end
 
 end

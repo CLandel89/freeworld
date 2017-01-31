@@ -1,6 +1,7 @@
 #include <string>
 //TODO: don't use std::exit here!!
 #include <cstdlib>
+#include <iostream>
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_keycode.h>
@@ -77,6 +78,7 @@ bool poll_event(InputEvent* event) {
 	switch (ev.type) {
 	case SDL_QUIT:
 		//TODO: find a sane way to implement this
+		std::cout << "Received SDL_QUIT. Shutting down, but not softly (implement me!).\n";
 		std::exit(0);
 		break;
 	case SDL_KEYDOWN:
@@ -101,7 +103,7 @@ bool poll_event(InputEvent* event) {
 			x_tmp = -1;
 		}
 		else if (ev.key.keysym.sym == right) {
-			event->type = CiType::AXIS_Y;
+			event->type = CiType::AXIS_X;
 			event->value = encode_f(1);
 			x_tmp = 1;
 		}
