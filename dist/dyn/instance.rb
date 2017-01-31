@@ -4,6 +4,8 @@ class Instance
   attr_reader :entity_layer_list
 
   FPS = 35.0
+  MAXNUM = (2**30 - 1)
+  MINNUM = (- 2**30)
 
   def initialize
     @players = []
@@ -42,6 +44,44 @@ class Instance
   def << entity
     @entities << entity
     return self
+  end
+
+  def space_RL entity
+    rs,ls = MAXNUM,MAXNUM
+    re,le = nil,nil
+    each_entity proc { |e2|
+      if e2.solid
+        rd,ld = entity.distance_RL e2
+        if rd < rs
+          rs = rd
+          re = e2
+        end
+        if ld < ls
+          ls = ld
+          le = e2
+        end
+      end
+    }
+    return rs,ls,re,le
+  end
+
+  def space_DU entity
+    ds,us = MAXNUM,MAXNUM
+    de,ue = nil,nil
+    each_entity proc { |e2|
+      if e2.solid
+        dd,ud = entity.distance_DU e2
+        if dd < ds
+          ds = dd
+          de = e2
+        end
+        if ud < us
+          us = ud
+          ue = e2
+        end
+      end
+    }
+    return ds,us,de,ue
   end
 
 end
