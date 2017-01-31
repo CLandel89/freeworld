@@ -11,8 +11,9 @@ class Player < AbstractEntity
   end
 
   def action
-    @x = x + @control.axis_x*10
-    @y = y + @control.axis_y*10
+    @control.action
+    @x = x + @control.a_x*10
+    @y = y + @control.a_y*10
   end
 
 end
