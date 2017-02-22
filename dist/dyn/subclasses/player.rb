@@ -12,6 +12,8 @@ class Player < AbstractEntity
     @control = Control.new self
     @sprite_id = sprite "std", "test"
     @frame_counter = 0
+    @la_x, @la_y = 0,0
+    @cx, @cy = x + w/2, y + h/2
   end
 
   def action
@@ -23,6 +25,13 @@ class Player < AbstractEntity
 #    @y += @control.a_y
     @squashed = me_action
     @frame_counter += 1
+    #smooth look-ahead and player in center approximation
+    @la_x = (@la_x*7 + @me_sx*8) / 8
+    @la_y = (@la_y*7 + @me_sy*8) / 8
+    @cx = (@cx*3 + @x + @w/2) / 4
+    @cy = (@cy*3 + @y + @h/2) / 4
+    @graphics.cam_x = @cx + @la_x
+    @graphics.cam_y = @cy + @la_y
   end
 
   def draw g
