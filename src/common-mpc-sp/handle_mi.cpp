@@ -4,10 +4,6 @@
 #include <iostream> //cout
 #include <sstream>
 
-#include "../impl-headers/sprite.h"
-#include "../impl-headers/video.h"
-#include "../impl-headers/wall.h"
-
 namespace Freeworld { namespace Common {
 
 void* raw; //temporary variable

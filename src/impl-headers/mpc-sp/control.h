@@ -4,10 +4,10 @@
 namespace Freeworld { namespace Impl {
 
 enum CiType {
-#include "../../dist/enums/ci_type.enum"
+#include "../../../dist/enums/ci_type.enum"
 };
 enum CiButton {
-#include "../../dist/enums/ci_button.enum"
+#include "../../../dist/enums/ci_button.enum"
 };
 
 typedef struct {

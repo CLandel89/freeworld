@@ -5,12 +5,12 @@
 //SDL2_gfx
 #include <SDL2/SDL2_rotozoom.h>
 
-#include "../../common-mpc-sp/package_manager.h"
+#include "../../../common-mpc-sp/package_manager.h"
 //helper functions and global variables:
 #include "sdl.h"
 
 //this source file implements the following interface headers:
-#include "../../impl-headers/wall.h"
+#include "../../../impl-headers/mpc-sp/wall.h"
 
 namespace Freeworld { namespace Impl {
 

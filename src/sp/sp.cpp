@@ -9,8 +9,8 @@
 #include <mruby/compile.h>
 #include <mruby/string.h>
 
-#include "../impl-headers/general.h"
-#include "../impl-headers/control.h"
+#include "../impl-headers/mpc-sp/control.h"
+#include "../impl-headers/mpc-sp/general.h"
 #include "../common-mpc-sp/handle_mi.h"
 #include "../common-mpc-sp/package_manager.h"
 #include "../common-mps-sp/load_vm.h"

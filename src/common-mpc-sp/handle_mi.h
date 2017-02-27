@@ -1,11 +1,13 @@
+#ifndef HANDLE_MI_H
+#define HANDLE_MI_H
+
 #include <map>
 
 #include "package_manager.h"
-#include "../impl-headers/sprite.h"
-#include "../impl-headers/wall.h"
 
-#ifndef HANDLE_MI_H
-#define HANDLE_MI_H
+#include "../impl-headers/mpc-sp/sprite.h"
+#include "../impl-headers/mpc-sp/wall.h"
+#include "../impl-headers/mpc-sp/video.h"
 
 namespace Freeworld { namespace Common {
 

@@ -9,13 +9,13 @@
 //SDL2_gfx
 #include <SDL2/SDL2_rotozoom.h>
 
-#include "../../common-mpc-sp/package_manager.h"
+#include "../../../common-mpc-sp/package_manager.h"
 
 //this source file implements the following interface headers:
-#include "../../impl-headers/general.h"
-#include "../../impl-headers/control.h"
-#include "../../impl-headers/sprite.h"
-#include "../../impl-headers/video.h"
+#include "../../../impl-headers/mpc-sp/control.h"
+#include "../../../impl-headers/mpc-sp/general.h"
+#include "../../../impl-headers/mpc-sp/sprite.h"
+#include "../../../impl-headers/mpc-sp/video.h"
 
 namespace Freeworld { namespace Impl {
 
