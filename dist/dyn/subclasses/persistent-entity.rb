@@ -1,2 +1,2 @@
-class PersistentEntity < AbstractEntity
+class PersistentEntity < Entity
 end

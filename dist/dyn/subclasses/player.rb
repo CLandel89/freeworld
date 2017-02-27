@@ -1,4 +1,4 @@
-class Player < AbstractEntity
+class Player < Entity
 
   include MovingEntity
 

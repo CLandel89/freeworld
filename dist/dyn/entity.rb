@@ -1,4 +1,4 @@
-class AbstractEntity
+class Entity
 
   attr_accessor :sprite_id, :wall_id
   attr_accessor :x, :y, :w, :h
@@ -20,17 +20,17 @@ class AbstractEntity
   def self.sprite pkg, fn
     CoreUtils.string_hash 'packages/' + pkg + '/sprites/' + fn + '.png'
   end
-  def sprite pkg,fn; AbstractEntity.sprite pkg,fn; end
+  def sprite pkg,fn; Entity.sprite pkg,fn; end
 
   def self.wall pkg, fn
     CoreUtils.string_hash 'packages/' + pkg + '/walls/' + fn + '.png'
   end
-  def wall pkg,fn; AbstractEntity.wall pkg,fn; end
+  def wall pkg,fn; Entity.wall pkg,fn; end
 
   def self.wall_jpg pkg, fn
     CoreUtils.string_hash 'packages/' + pkg + '/walls/' + fn + '.jpg'
   end
-  def wall_jpg pkg,fn; AbstractEntity.wall_jpg pkg,fn; end
+  def wall_jpg pkg,fn; Entity.wall_jpg pkg,fn; end
 
   def distance_RL e2
     if @y > e2.y + e2.h
