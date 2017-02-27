@@ -21,6 +21,11 @@ MiParser::~MiParser() {
 		if (sprite != NULL)
 			delete sprite;
 	}
+	for (auto iterator = walls.begin(); iterator != walls.end(); iterator++) {
+		Wall* wall = iterator->second;
+		if (wall != NULL)
+			delete wall;
+	}
 	if (current_data_length)
 		delete current_data;
 }

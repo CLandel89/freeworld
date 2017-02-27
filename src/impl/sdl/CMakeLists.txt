@@ -12,4 +12,5 @@ add_library(
     "freeworld-sdl"
     SHARED
     "sdl.cpp"
+    "wall.cpp"
 )

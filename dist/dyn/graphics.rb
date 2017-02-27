@@ -33,7 +33,9 @@ class Graphics
     x,y,w,h = (x_to_screen entity.x), (y_to_screen entity.y), entity.w, entity.h
     wall_id = entity.wall_id
     if wall_id!=nil
-      draw_wall_raw wall_id, x,y,w,h, entity.offset_x,entity.offset_y
+      os_x = recalc_offset_x entity.offset_x,entity.x
+      os_y = recalc_offset_y entity.offset_y,entity.y
+      draw_wall_raw wall_id, x,y,w,h, os_x,os_y
     end
     sprite_id = entity.sprite_id
     if sprite_id!=nil
@@ -95,6 +97,14 @@ class Graphics
 
   def y_to_screen y
     y - @cam_y + @res_h_2
+  end
+
+  def recalc_offset_x os_x,entity_x
+    os_x + entity_x
+  end
+
+  def recalc_offset_y os_y,entity_y
+    os_y + entity_y
   end
 
   def encode_i32 num

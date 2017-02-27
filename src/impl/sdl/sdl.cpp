@@ -6,7 +6,6 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_keycode.h>
 #include <SDL2/SDL_image.h>
-
 //SDL2_gfx
 #include <SDL2/SDL2_rotozoom.h>
 
@@ -17,7 +16,6 @@
 #include "../../impl-headers/control.h"
 #include "../../impl-headers/sprite.h"
 #include "../../impl-headers/video.h"
-#include "../../impl-headers/wall.h"
 
 namespace Freeworld { namespace Impl {
 
@@ -204,47 +202,6 @@ void Sprite::draw(int32_t x, int32_t y) {
 		return;
 	}
 	SDL_BlitSurface(priv->img, NULL, window_surf, &dstrect);
-}
-
-// W A L L
-
-class WallPrivate {
-public:
-	SDL_Surface* img = NULL;
-};
-Wall::Wall(int32_t id) {
-	priv = new WallPrivate();
-	std::string fn = Freeworld::Common::get_package_manager()->fn_for_hash(id);
-	if (fn.empty()) {
-		priv->img = NULL;
-		return;
-	}
-	SDL_Surface* tmp = IMG_Load(fn.c_str());
-	if (tmp == NULL) {
-		priv->img = NULL;
-		return;
-	}
-	priv->img = zoomSurface(tmp, resolution_factor, resolution_factor, SMOOTHING_ON);
-	SDL_FreeSurface(tmp);
-}
-Wall::~Wall() {
-	if (priv->img != NULL) {
-		SDL_FreeSurface(priv->img);
-	}
-	delete priv;
-}
-void Wall::draw(int32_t x, int32_t y, int32_t w, int32_t h, int32_t offset_x, int32_t offset_y) {
-	SDL_Rect dstrect, srcrect;
-	srcrect.x = offset_x;
-	srcrect.y = offset_y;
-	window_coordinates(x,y, &dstrect);
-	dstrect.w = (srcrect.w =  (int32_t)(w*resolution_factor));
-	dstrect.h = (srcrect.h =  (int32_t)(h*resolution_factor));
-	if (priv->img == NULL) {
-		SDL_FillRect(window_surf, &dstrect, SDL_MapRGB(window_px_form, 255, 0, 0));
-		return;
-	}
-	SDL_BlitSurface(priv->img, &srcrect, window_surf, &dstrect);
 }
 
 // V I D E O
