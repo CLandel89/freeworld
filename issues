@@ -1,0 +1,10 @@
+ - common-mpc-sp/handle_mi.cpp:85: delete data; einfügen!
+ - Struktur: app, impl -> integration/{app,lib}; sp,...,common-..., -> ./mpc-sp,...
+    ; ns Freeworld::Common zu Freeworld abflachen; ns Freeworld::Impl -> Freeworld::Integration
+    ; impl-headers -> integration-headers; sdl-implementierung entspr. headers aufsplitten
+ - impl-headers/mpc-sp: falsche bezeichner
+ - relative includes -> absolute includes ( no more #include "../.. ...")
+ - entity-layers (was oberhalb von anderen angezeigt wird)
+ - distance aus Instance nach ChunkManager
+ - soft shutdown
+ - package-manager.cpp: exception müssen const &, keine java-shit-way-of-life get-methode!
