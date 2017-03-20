@@ -1,4 +1,3 @@
- - common-mpc-sp/handle_mi.cpp:85: delete data; einfügen!
  - Struktur: app, impl -> integration/{app,lib}; sp,...,common-..., -> ./mpc-sp,...
     ; ns Freeworld::Common zu Freeworld abflachen; ns Freeworld::Impl -> Freeworld::Integration
     ; impl-headers -> integration-headers; sdl-implementierung entspr. headers aufsplitten

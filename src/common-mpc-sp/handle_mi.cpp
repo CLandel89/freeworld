@@ -84,6 +84,7 @@ void MiParser::parse_mi (int length, uint8_t* data) {
 		memcpy(new_data, current_data, current_data_length);
 		memcpy(new_data + current_data_length, data, length);
 		delete current_data;
+		delete data;
 		current_data = new_data;
 		current_data_length += length;
 	}
