@@ -1,3 +1,7 @@
+def debug str
+  puts str
+end
+
 class Instance
 
   attr_accessor :players
@@ -9,23 +13,23 @@ class Instance
 
   def initialize
     @players = []
-#    @chunks = []
-#    @entity_layer_list
-    @entities = []
-    #reference globally
+    #global references
     $instance = self
+    $option_manager = OptionManager.new
+    $chunk_manager = ChunkManager.new
   end
 
   def main
     frame_time = 1.0 / FPS
     while true
       @players.each do |p|
+        $chunk_manager.action
         p.action
         g = p.graphics
         #draw blue sky
         g.fill_rect_raw 0,0,g.res_w,g.res_h, 0,255,255
         #draw entities
-        each_entity proc {|e| g.draw e}
+        $chunk_manager.each_entity proc {|e| g.draw e}
         #draw player
         g.draw p
         g.complete_frame
@@ -35,21 +39,10 @@ class Instance
     end
   end
 
-  def each_entity func
-    @entities.each do |e|
-      func.call e
-    end
-  end
-
-  def << entity
-    @entities << entity
-    return self
-  end
-
   def space_RL entity
     rs,ls = MAXNUM,MAXNUM
     re,le = nil,nil
-    each_entity proc { |e2|
+    $chunk_manager.each_entity proc { |e2|
       if e2.solid
         rd,ld = entity.distance_RL e2
         if rd < rs
@@ -68,7 +61,7 @@ class Instance
   def space_DU entity
     ds,us = MAXNUM,MAXNUM
     de,ue = nil,nil
-    each_entity proc { |e2|
+    $chunk_manager.each_entity proc { |e2|
       if e2.solid
         dd,ud = entity.distance_DU e2
         if dd < ds

@@ -14,4 +14,6 @@ add_library (
     SHARED
     "load_vm.cpp"
     "core_utils.cpp"
+    "database/database.cpp"
+    "database/chunks.cpp"
 )

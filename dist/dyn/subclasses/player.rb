@@ -5,8 +5,8 @@ class Player < Entity
   attr_accessor :button
   attr_reader :graphics
 
-  def initialize x,y,w,h
-    super x,y,w,h
+  def initialize x,y,z,w,h
+    super x,y,z,w,h
     me_initialize
     @graphics = Graphics.new
     @control = Control.new self

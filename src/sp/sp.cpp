@@ -15,6 +15,7 @@
 #include "../common-mpc-sp/package_manager.h"
 #include "../common-mps-sp/load_vm.h"
 #include "../common-mps-sp/core_utils.h"
+#include "../common-mps-sp/database/database.h"
 
 namespace Freeworld { namespace Sp {
 
@@ -27,10 +28,11 @@ mrb_value parse_mi (mrb_state* state, mrb_value value);
 void init_ci_poller(mrb_state * vm);
 mrb_value poll_ci (mrb_state* state, mrb_value value);
 
-void start(std::string save, std::vector<std::string> vm_pkgs, std::vector<std::string> media_pkgs) {
+void start(std::string world, std::vector<std::string> vm_pkgs, std::vector<std::string> media_pkgs) {
 	Freeworld::Impl::init();
 	vm = mrb_open();
 	Freeworld::Common::CoreUtils::init(vm);
+	Freeworld::Common::Database::init(vm);
 	init_mi_parser(vm);
 	init_ci_poller(vm);
 	Freeworld::Common::load_vm(vm, vm_pkgs);
@@ -38,7 +40,7 @@ void start(std::string save, std::vector<std::string> vm_pkgs, std::vector<std::
 		Freeworld::Common::get_package_manager()->load(*iter);
 	}
 	//instruct module to start
-	mrb_load_string(vm, ("start_instance_sp '" + save + "'").c_str());
+	mrb_load_string(vm, ("start_instance_sp '" + world + "'").c_str());
 }
 
 void stop() {

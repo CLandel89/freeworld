@@ -1,21 +1,21 @@
-class Wall < PersistentEntity
+class Wall < Entity
+  include BinUtils
   attr_accessor :offset_x, :offset_y
 
-  def initialize x,y,w,h, pkg,name
-    super x,y,w,h
-    @wall_id = wall pkg,name
-    @offset_x,@offset_y = 0,0
+  def initialize x,y,z,w,h, ed
+    super x,y,z,w,h
+    if ed.length != 12
+      puts "Fatal error: Entity data length for Wall != 12."
+    end
+    @offset_x = decode_s32 ed,0
+    @offset_y = decode_s32 ed,4
+    @wall_id = decode_s32 ed,8
   end
 
-  def initialize x,y,w,h
-    super x,y,w,h
-    @offset_x,@offset_y = 0,0
-  end
-
-  def self.new_jpg x,y,w,h, pkg,name
-    result = Wall.new x,y,w,h
-    result.wall_id = wall_jpg pkg,name
-    return result
+  def self.type_id
+    CoreUtils.string_hash 'Wall'
   end
 
 end
+
+$entity_type_manager << Wall

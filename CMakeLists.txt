@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 2.6)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/src/impl/mpc-sp/sdl/)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/src/impl/mps-sp/sqlite/)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/src/app/sp/default/)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/src/app/mpc/default/)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/src/app/mps/default/)

@@ -1,2 +1,0 @@
-class PersistentEntity < Entity
-end

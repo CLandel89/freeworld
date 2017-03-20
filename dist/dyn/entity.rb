@@ -1,15 +1,15 @@
 class Entity
 
   attr_accessor :sprite_id, :wall_id
-  attr_accessor :x, :y, :w, :h
+  attr_accessor :x, :y, :z, :w, :h
 
   MAXNUM = (2**30 - 1)
   MINNUM = (- 2**30)
 
-  def initialize x,y,w,h
+  def initialize x,y,z,w,h
     @sprite_id = nil
     @wall_id = nil
-    @x,@y,@w,@h = x,y,w,h
+    @x,@y,@z,@w,@h = x,y,z,w,h
   end
 
   #entities are solid by default
