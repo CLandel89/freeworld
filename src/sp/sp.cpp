@@ -1,4 +1,4 @@
-#include "sp.h"
+#include "src/sp/sp.hpp"
 
 #include <cstring> //memcpy
 #include <string>
@@ -9,13 +9,13 @@
 #include <mruby/compile.h>
 #include <mruby/string.h>
 
-#include "../impl-headers/mpc-sp/control.h"
-#include "../impl-headers/mpc-sp/general.h"
-#include "../common-mpc-sp/handle_mi.h"
-#include "../common-mpc-sp/package_manager.h"
-#include "../common-mps-sp/load_vm.h"
-#include "../common-mps-sp/core_utils.h"
-#include "../common-mps-sp/database/database.h"
+#include "src/integration-headers/mpc-sp/control.hpp"
+#include "src/integration-headers/mpc-sp/general.hpp"
+#include "src/mpc-sp/handle_mi.hpp"
+#include "src/mpc-sp/package_manager.hpp"
+#include "src/mps-sp/load_vm.hpp"
+#include "src/mps-sp/core_utils.hpp"
+#include "src/mps-sp/database/database.hpp"
 
 namespace Freeworld { namespace Sp {
 

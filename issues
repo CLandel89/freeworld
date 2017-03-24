@@ -7,3 +7,6 @@
  - distance aus Instance nach ChunkManager
  - soft shutdown
  - package-manager.cpp: exception müssen const &, keine java-shit-way-of-life get-methode!
+ - intg.-hdrs/mps-sp/chunks.h: "and to close it" -> "and to close the db"
+ - main.cpp: default catch block
+ - src/mps-sp-headers/runtime.hpp soll Freeworld::start() etc. deklarieren, MPS und SP sollen versch. Definitionen implementieren

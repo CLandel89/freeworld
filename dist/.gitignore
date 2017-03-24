@@ -1,9 +1,9 @@
 #folder produced by cmake:
 lib/
 #executables produced:
-freeworld-mpc-default
-freeworld-mpc-default.exe
-freeworld-mps-default
-freeworld-mps-default.exe
-freeworld-sp-default
-freeworld-sp-default.exe
+freeworld-mpc-sdl
+freeworld-mpc-sdl.exe
+freeworld-mps-sqlite
+freeworld-mps-sqlite.exe
+freeworld-sp-sdl-sqlite
+freeworld-sp-sdl-sqlite.exe

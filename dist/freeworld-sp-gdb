@@ -2,4 +2,4 @@
 # Start script for freeworld on linux (and possibly other unixoids).
 
 cd "$(dirname "$(which $0)")"
-LD_LIBRARY_PATH="$LD_LIBRARY_PATH ./lib" ./freeworld-sp-sdl-sqlite
+LD_LIBRARY_PATH="$LD_LIBRARY_PATH ./lib" gdb ./freeworld-sp-sdl-sqlite
