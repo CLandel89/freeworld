@@ -29,7 +29,7 @@ void init_ci_poller(mrb_state * vm);
 mrb_value poll_ci_func (mrb_state* state, mrb_value value);
 
 void start(std::string world, std::vector<std::string> vm_pkgs, std::vector<std::string> media_pkgs) {
-	Freeworld::Impl::init();
+	Freeworld::Integration::init();
 	vm = mrb_open();
 	Freeworld::init_core_utils(vm);
 	Freeworld::init_database(vm);
@@ -45,7 +45,7 @@ void start(std::string world, std::vector<std::string> vm_pkgs, std::vector<std:
 
 void stop() {
 	mrb_close(vm);
-	Freeworld::Impl::quit();
+	Freeworld::Integration::quit();
 }
 
 void init_mi_parser(mrb_state* vm) {
@@ -70,8 +70,8 @@ void init_ci_poller(mrb_state* vm) {
 }
 
 mrb_value poll_ci_func (mrb_state* vm, mrb_value value) {
-	Freeworld::Impl::InputEvent ie;
-	if (Freeworld::Impl::poll_event(&ie)) {
+	Freeworld::Integration::InputEvent ie;
+	if (Freeworld::Integration::poll_input(&ie)) {
 		return mrb_str_new(vm, (char*)&ie, 8);
 	}
 	return mrb_str_new(vm, NULL, 0);

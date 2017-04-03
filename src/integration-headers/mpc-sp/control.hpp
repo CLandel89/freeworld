@@ -1,7 +1,7 @@
 #ifndef INPUT_H
 #define INPUT_H
 
-namespace Freeworld { namespace Impl {
+namespace Freeworld { namespace Integration {
 
 enum CiType {
 #include "dist/enums/ci_type.enum"
@@ -17,8 +17,8 @@ typedef struct {
 
 /** Returns true if an event has been processed ('event' is filled),
  *  false if there are no input events pending. */
-bool poll_event(InputEvent* event);
+bool poll_input(InputEvent* event);
 
-} } //end of namespace Freeworld::Impl
+} } //end of namespace Freeworld::Integration
 
 #endif //INPUT_H

@@ -10,7 +10,7 @@
 //helper functions and global variables:
 #include "src/integration-headers/mpc-sp/wall.hpp"
 
-namespace Freeworld { namespace Impl {
+namespace Freeworld { namespace Integration {
 
 class WallPrivate {
 public:
@@ -186,4 +186,4 @@ void Wall::draw(int32_t x, int32_t y, int32_t w, int32_t h, int32_t offset_x, in
 }
 
 
-} } //end of namespace Freeworld:Impl
+} } //end of namespace Freeworld:Integration

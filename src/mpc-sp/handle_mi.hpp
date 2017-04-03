@@ -11,8 +11,8 @@
 
 namespace Freeworld {
 
-using Freeworld::Impl::Sprite;
-using Freeworld::Impl::Wall;
+using Freeworld::Integration::Sprite;
+using Freeworld::Integration::Wall;
 
 class MiParser
 {

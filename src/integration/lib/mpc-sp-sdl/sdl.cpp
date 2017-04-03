@@ -17,7 +17,7 @@
 #include "src/integration-headers/mpc-sp/sprite.hpp"
 #include "src/integration-headers/mpc-sp/video.hpp"
 
-namespace Freeworld { namespace Impl {
+namespace Freeworld { namespace Integration {
 
 SDL_Window* window;
 SDL_Surface* window_surf;
@@ -69,7 +69,7 @@ SDL_Keycode d = SDLK_x;
 
 float x_tmp = 0, y_tmp = 0;
 
-bool poll_event(InputEvent* event) {
+bool poll_input(InputEvent* event) {
 	SDL_Event ev;
 	if (! SDL_PollEvent(&ev))
 		return false;
@@ -81,7 +81,7 @@ bool poll_event(InputEvent* event) {
 		break;
 	case SDL_KEYDOWN:
 		if (ev.key.repeat!=0)
-			return poll_event(event);
+			return poll_input(event);
 		event->type = CiType::PRESS;
 		if (ev.key.keysym.sym == jump)
 			event->value = CiButton::JUMP;
@@ -116,11 +116,11 @@ bool poll_event(InputEvent* event) {
 		else if (ev.key.keysym.sym == d)
 			event->value = CiButton::D;
 		else
-			return poll_event(event);
+			return poll_input(event);
 		return true;
 	case SDL_KEYUP:
 		if (ev.key.repeat!=0)
-			return poll_event(event);
+			return poll_input(event);
 		event->type = CiType::RELEASE;
 		if (ev.key.keysym.sym == jump)
 			event->value = CiButton::JUMP;
@@ -159,10 +159,10 @@ bool poll_event(InputEvent* event) {
 		else if (ev.key.keysym.sym == d)
 			event->value = CiButton::D;
 		else
-			return poll_event(event);
+			return poll_input(event);
 		return true;
 	}
-	return poll_event(event);
+	return poll_input(event);
 }
 
 // S P R I T E
@@ -260,4 +260,4 @@ void fill_rect(int32_t x, int32_t y, int32_t w, int32_t h, uint8_t r, uint8_t g,
 	SDL_FillRect(window_surf, &dstrect, SDL_MapRGB(window_px_form, r, g, b));
 }
 
-} } //end of namespace Freeworld:Impl
+} } //end of namespace Freeworld:Integration

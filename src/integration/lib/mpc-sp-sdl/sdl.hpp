@@ -3,7 +3,7 @@
 
 #include <SDL2/SDL.h>
 
-namespace Freeworld { namespace Impl {
+namespace Freeworld { namespace Integration {
 
 extern SDL_Window* window;
 extern SDL_Surface* window_surf;
@@ -15,6 +15,6 @@ extern int letterbox_h;
 extern float resolution_factor;
 void window_coordinates (int32_t x, int32_t y, SDL_Rect* dstrect);
 
-} } //end of namespace Freeworld:Impl
+} } // end of namespace Freeworld:Integration
 
 #endif //SDL_H

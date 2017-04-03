@@ -4,7 +4,7 @@
 // this source file implements the following header:
 #include "src/integration-headers/mps-sp/chunks.hpp"
 
-namespace Freeworld { namespace Impl {
+namespace Freeworld { namespace Integration {
 
 // internal workings
 
@@ -70,4 +70,4 @@ BinData* read_chunk() {
 	return lastData;
 }
 
-} } //end of namespace Freeworld:Impl
+} } //end of namespace Freeworld:Integration

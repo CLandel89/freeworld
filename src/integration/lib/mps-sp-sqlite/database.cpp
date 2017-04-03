@@ -6,7 +6,7 @@
 //this source file implements the following header:
 #include "src/integration-headers/mps-sp/database.hpp"
 
-namespace Freeworld { namespace Impl {
+namespace Freeworld { namespace Integration {
 
 sqlite3* database;
 
@@ -35,4 +35,4 @@ void close_world() {
 	sqlite3_close(database);
 }
 
-} } //end of namespace Freeworld:Impl
+} } //end of namespace Freeworld:Integration

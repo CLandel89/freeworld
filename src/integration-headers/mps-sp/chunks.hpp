@@ -1,7 +1,7 @@
 #ifndef CHUNKS_H
 #define CHUNKS_H
 
-namespace Freeworld { namespace Impl {
+namespace Freeworld { namespace Integration {
 
 typedef struct {
 	uint8_t* data;
@@ -14,6 +14,6 @@ void open_chunk(int32_t x, int32_t y, int32_t z);
 //and to close it on the last, NULL returning call
 BinData* read_chunk();
 
-} } //end of namespace Freeworld::Impl
+} } // end of namespace Freeworld::Integration
 
 #endif //CHUNKS_H

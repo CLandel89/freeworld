@@ -3,11 +3,11 @@
 
 #include <string>
 
-namespace Freeworld { namespace Impl {
+namespace Freeworld { namespace Integration {
 
 void open_world(std::string world);
 void close_world();
 
-} } //end of namespace Freeworld::Impl
+} } // end of namespace Freeworld::Integration
 
 #endif //DATABASE_H

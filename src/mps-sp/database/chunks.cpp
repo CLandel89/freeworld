@@ -12,13 +12,13 @@ mrb_value open_chunk_func (mrb_state* vm, mrb_value self) {
 	mrb_value result, arg_x, arg_y, arg_z;
 	mrb_get_args(vm, "iii", &arg_x, &arg_y, &arg_z);
 	int32_t x = arg_x.value.i, y = arg_y.value.i, z = arg_z.value.i;
-	Freeworld::Impl::open_chunk(x,y,z);
+	Freeworld::Integration::open_chunk(x,y,z);
 	SET_NIL_VALUE(result);
 	return result;
 }
 
 mrb_value read_chunk_func (mrb_state* vm, mrb_value self) {
-	auto result = Freeworld::Impl::read_chunk();
+	auto result = Freeworld::Integration::read_chunk();
 	return mrb_str_new(vm, (char*)(result->data), result->size);
 }
 
