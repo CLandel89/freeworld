@@ -1,6 +1,6 @@
 #include "src/mpc-mps-sp/utils.hpp"
 
-namespace Freeworld { namespace Common {
+namespace Freeworld {
 
 int32_t string_hash (std::string str) {
 	int32_t result = 0;
@@ -11,4 +11,4 @@ int32_t string_hash (std::string str) {
 	return result;
 }
 
-} } // end of namespace Freeworld::Common
+} // end of namespace Freeworld

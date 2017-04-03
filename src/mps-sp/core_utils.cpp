@@ -15,22 +15,22 @@
 
 #include "src/mpc-mps-sp/utils.hpp"
 
-namespace Freeworld { namespace Common { namespace CoreUtils {
+namespace Freeworld {
 
-mrb_value add_enum (mrb_state* vm, mrb_value self);
-mrb_value sleep (mrb_state* vm, mrb_value self);
+mrb_value add_enum_func (mrb_state* vm, mrb_value self);
+mrb_value sleep_func (mrb_state* vm, mrb_value self);
 mrb_value string_hash_func (mrb_state* vm, mrb_value self);
 
-void init (mrb_state* vm)
+void init_core_utils (mrb_state* vm)
 {
 	struct RClass* core_utils_class = mrb_define_module(vm, "CoreUtils");
 
-	mrb_define_class_method(vm, core_utils_class, "add_enum", &add_enum, MRB_ARGS_ARG(2,0));
-	mrb_define_class_method(vm, core_utils_class, "sleep", &sleep, MRB_ARGS_ARG(1,0));
+	mrb_define_class_method(vm, core_utils_class, "add_enum", &add_enum_func, MRB_ARGS_ARG(2,0));
+	mrb_define_class_method(vm, core_utils_class, "sleep", &sleep_func, MRB_ARGS_ARG(1,0));
 	mrb_define_class_method(vm, core_utils_class, "string_hash", &string_hash_func, MRB_ARGS_ARG(1,0));
 }
 
-mrb_value add_enum (mrb_state* vm, mrb_value self) {
+mrb_value add_enum_func (mrb_state* vm, mrb_value self) {
 	mrb_value name;
 	mrb_value file;
 	mrb_get_args(vm, "SS", &name, &file);
@@ -59,7 +59,7 @@ mrb_value add_enum (mrb_state* vm, mrb_value self) {
 	return mrb_nil_value();
 }
 
-mrb_value sleep (mrb_state* vm, mrb_value self) {
+mrb_value sleep_func (mrb_state* vm, mrb_value self) {
 	static boost::asio::io_service io_service;
 	mrb_value seconds_raw;
 	mrb_get_args(vm, "f", &seconds_raw);
@@ -74,9 +74,9 @@ mrb_value sleep (mrb_state* vm, mrb_value self) {
 mrb_value string_hash_func (mrb_state* vm, mrb_value self) {
 	mrb_value result, arg;
 	mrb_get_args(vm, "S", &arg);
-	result.value.i = Freeworld::Common::string_hash(mrb_str_to_cstr(vm, arg));
+	result.value.i = Freeworld::string_hash(mrb_str_to_cstr(vm, arg));
 	result.tt = MRB_TT_FIXNUM;
 	return result;
 }
 
-} } } // end of namespace Freeworld::Common::CoreUtils
+} // end of namespace Freeworld

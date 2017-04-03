@@ -173,7 +173,7 @@ public:
 };
 Sprite::Sprite(int32_t id) {
 	priv = new SpritePrivate();
-	std::string fn = Freeworld::Common::get_package_manager()->fn_for_hash(id);
+	std::string fn = Freeworld::get_package_manager()->fn_for_hash(id);
 	if (fn.empty()) {
 		priv->img = NULL;
 		return;

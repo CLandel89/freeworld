@@ -6,7 +6,7 @@
 
 #include <boost/filesystem.hpp>
 
-namespace Freeworld { namespace Common {
+namespace Freeworld {
 
 class PackageManager {
 	std::map<int32_t, std::string> fn;
@@ -19,6 +19,6 @@ public:
 
 PackageManager* get_package_manager();
 
-} } // end of namespace Freeworld::Common
+} // end of namespace Freeworld
 
 #endif /* PACKAGE_MANAGER_H */

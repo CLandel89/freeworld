@@ -3,10 +3,10 @@
 
 #include <string>
 
-namespace Freeworld { namespace Common {
+namespace Freeworld {
 
 int32_t string_hash (std::string str);
 
-} } // end of namespace Freeworld::Common
+} // end of namespace Freeworld
 
 #endif //UTILS_H

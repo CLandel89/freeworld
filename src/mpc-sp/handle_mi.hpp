@@ -9,7 +9,7 @@
 #include "src/integration-headers/mpc-sp/wall.hpp"
 #include "src/integration-headers/mpc-sp/video.hpp"
 
-namespace Freeworld { namespace Common {
+namespace Freeworld {
 
 using Freeworld::Impl::Sprite;
 using Freeworld::Impl::Wall;
@@ -41,6 +41,6 @@ public:
 	void parse_mi (int length, uint8_t* data);
 };
 
-} } //end of namespace Freeworld::Common
+} //end of namespace Freeworld
 
 #endif //HANDLE_MI_H

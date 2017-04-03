@@ -7,7 +7,7 @@
 
 #include "src/mpc-mps-sp/utils.hpp"
 
-namespace Freeworld { namespace Common {
+namespace Freeworld {
 
 void PackageManager::load(std::string name) {
 	boost::filesystem::path path("packages/" + name);
@@ -27,7 +27,7 @@ void PackageManager::rec_load(boost::filesystem::path path) {
 			rec_load(*iter);
 		else
 		{
-			auto hash = Freeworld::Common::string_hash(filename);
+			auto hash = Freeworld::string_hash(filename);
 			fn[hash] = filename;
 		}
 	}
@@ -50,4 +50,4 @@ PackageManager* get_package_manager() {
 	return &packageManager;
 }
 
-} } // end of namespace Freeworld::Common
+} // end of namespace Freeworld

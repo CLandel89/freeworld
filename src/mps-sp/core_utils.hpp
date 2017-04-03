@@ -5,10 +5,10 @@
 
 #include <mruby.h>
 
-namespace Freeworld { namespace Common { namespace CoreUtils {
+namespace Freeworld {
 
-void init (mrb_state* vm);
+void init_core_utils (mrb_state* vm);
 
-} } } // end of namespace Freeworld::Common::CoreUtils
+} // end of namespace Freeworld
 
-#endif /* SRC_COMMON_MPS_SP_CORE_UTILS_H_ */
+#endif // CORE_UTILS_H_

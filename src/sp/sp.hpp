@@ -4,11 +4,11 @@
 #include <string>
 #include <vector>
 
-namespace Freeworld { namespace Sp {
+namespace Freeworld {
 
 void start(std::string world, std::vector<std::string> vm_pkgs, std::vector<std::string> media_pkgs);
 void stop();
 
-} } //end of Freeworld::Sp
+} // end of namespace Freeworld
 
 #endif //SP_H

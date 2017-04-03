@@ -3,11 +3,11 @@
 
 #include <mruby.h>
 
-namespace Freeworld { namespace Common { namespace Database {
+namespace Freeworld {
 
-mrb_value open_chunk (mrb_state* vm, mrb_value self);
-mrb_value read_chunk (mrb_state* vm, mrb_value self);
+mrb_value open_chunk_func (mrb_state* vm, mrb_value self);
+mrb_value read_chunk_func (mrb_state* vm, mrb_value self);
 
-} } } // end of namespace Freeworld::Common::CoreUtils
+} // end of namespace Freeworld
 
 #endif // DATABASE_CHUNKS_H

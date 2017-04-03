@@ -7,10 +7,10 @@
 #include <mruby.h>
 #include <mruby/compile.h>
 
-namespace Freeworld { namespace Common {
+namespace Freeworld {
 
 void load_vm(mrb_state* vm, std::vector<std::string> pkgs);
 
-} } //end of namespace Freeworld::Common
+} //end of namespace Freeworld
 
 #endif //LOAD_VM_H

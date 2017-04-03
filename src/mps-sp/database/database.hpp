@@ -3,10 +3,10 @@
 
 #include <mruby.h>
 
-namespace Freeworld { namespace Common { namespace Database {
+namespace Freeworld {
 
-void init (mrb_state* vm);
+void init_database (mrb_state* vm);
 
-} } } // end of namespace Freeworld::Common::Database
+} // end of namespace Freeworld
 
 #endif // DATABASE_CHUNKS_H

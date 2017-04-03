@@ -6,9 +6,9 @@
 
 #include "src/integration-headers/mps-sp/chunks.hpp"
 
-namespace Freeworld { namespace Common { namespace Database {
+namespace Freeworld {
 
-mrb_value open_chunk (mrb_state* vm, mrb_value self) {
+mrb_value open_chunk_func (mrb_state* vm, mrb_value self) {
 	mrb_value result, arg_x, arg_y, arg_z;
 	mrb_get_args(vm, "iii", &arg_x, &arg_y, &arg_z);
 	int32_t x = arg_x.value.i, y = arg_y.value.i, z = arg_z.value.i;
@@ -17,9 +17,9 @@ mrb_value open_chunk (mrb_state* vm, mrb_value self) {
 	return result;
 }
 
-mrb_value read_chunk (mrb_state* vm, mrb_value self) {
+mrb_value read_chunk_func (mrb_state* vm, mrb_value self) {
 	auto result = Freeworld::Impl::read_chunk();
 	return mrb_str_new(vm, (char*)(result->data), result->size);
 }
 
-} } } // end of namespace Freeworld::Common::Database
+} // end of namespace Freeworld

@@ -4,7 +4,7 @@
 #include <iostream> //cout
 #include <sstream>
 
-namespace Freeworld { namespace Common {
+namespace Freeworld {
 
 void* raw; //temporary variable
 
@@ -156,4 +156,4 @@ void MiParser::parse_mi (int length, uint8_t* data) {
 	current_data_length = 0;
 }
 
-} } //end of namespace Freeworld::Common
+} //end of namespace Freeworld

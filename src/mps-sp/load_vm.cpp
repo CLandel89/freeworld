@@ -11,7 +11,7 @@
 #include <mruby.h>
 #include <mruby/compile.h>
 
-namespace Freeworld { namespace Common {
+namespace Freeworld {
 
 //recursively load all .rb scripts in a directory
 void rec_load(mrb_state* vm, boost::filesystem::path path);
@@ -77,4 +77,4 @@ void rec_load(mrb_state* vm, boost::filesystem::path path)
 	}
 }
 
-} } //end of namespace Freeworld::Common
+} //end of namespace Freeworld
