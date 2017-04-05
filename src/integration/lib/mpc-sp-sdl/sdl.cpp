@@ -12,7 +12,7 @@
 #include "src/mpc-sp/package_manager.hpp"
 
 //this source file implements the following interface headers:
-#include "src/integration-headers/mpc-sp/control.hpp"
+#include "src/integration-headers/mpc-sp/input.hpp"
 #include "src/integration-headers/mpc-sp/general.hpp"
 #include "src/integration-headers/mpc-sp/sprite.hpp"
 #include "src/integration-headers/mpc-sp/video.hpp"

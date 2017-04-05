@@ -9,7 +9,7 @@
 #include <mruby/compile.h>
 #include <mruby/string.h>
 
-#include "src/integration-headers/mpc-sp/control.hpp"
+#include "src/integration-headers/mpc-sp/input.hpp"
 #include "src/integration-headers/mpc-sp/general.hpp"
 #include "src/mpc-sp/handle_mi.hpp"
 #include "src/mpc-sp/package_manager.hpp"
