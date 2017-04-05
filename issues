@@ -1,4 +1,3 @@
- - main.cpp: default catch block
  - package-manager.cpp: exception müssen const &, keine java-shit-way-of-life get-methode!
  - impl-headers/mpc-sp: falsche bezeichner
  - integration/.../sdl.cpp: poll_input: "return false" überprüfen
