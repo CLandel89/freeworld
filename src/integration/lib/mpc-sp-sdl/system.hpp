@@ -1,5 +1,5 @@
-#ifndef SDL_H
-#define SDL_H
+#ifndef FREEWORLD_SDL_SYSTEM_HPP
+#define FREEWORLD_SDL_SYSTEM_HPP
 
 #include <SDL2/SDL.h>
 
@@ -14,7 +14,8 @@ extern int letterbox_w;
 extern int letterbox_h;
 extern float resolution_factor;
 void window_coordinates (int32_t x, int32_t y, SDL_Rect* dstrect);
+int32_t encode_f (float f);
 
 } } // end of namespace Freeworld:Integration
 
-#endif //SDL_H
+#endif // FREEWORLD_SDL_SYSTEM_HPP

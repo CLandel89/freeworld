@@ -1,12 +1,10 @@
-#include "src/integration/lib/mpc-sp-sdl/sdl.hpp"
-#include <string>
-
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 //SDL2_gfx
 #include <SDL2/SDL2_rotozoom.h>
 
 #include "src/mpc-sp/package_manager.hpp"
+#include "src/integration/lib/mpc-sp-sdl/system.hpp"
 //helper functions and global variables:
 #include "src/integration-headers/mpc-sp/wall.hpp"
 

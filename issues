@@ -1,6 +1,3 @@
- - Struktur: app, impl -> integration/{app,lib}; sp,...,common-..., -> ./mpc-sp,...
-    ; ns Freeworld::Common zu Freeworld abflachen; ns Freeworld::Impl -> Freeworld::Integration
-    ; impl-headers -> integration-headers; sdl-implementierung entspr. headers aufsplitten
  - impl-headers/mpc-sp: falsche bezeichner
  - relative includes -> absolute includes ( no more #include "../.. ...")
  - entity-layers (was oberhalb von anderen angezeigt wird)
