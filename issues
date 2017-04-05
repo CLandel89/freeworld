@@ -1,4 +1,3 @@
- - intg.-hdrs/mps-sp/chunks.h: "and to close it" -> "and to close the db"
  - main.cpp: default catch block
  - package-manager.cpp: exception müssen const &, keine java-shit-way-of-life get-methode!
  - impl-headers/mpc-sp: falsche bezeichner
