@@ -10,7 +10,7 @@
 #include <mruby/string.h>
 
 #include "src/integration-headers/mpc-sp/input.hpp"
-#include "src/integration-headers/mpc-sp/general.hpp"
+#include "src/integration-headers/mpc-mps-sp/system.hpp"
 #include "src/mpc-sp/handle_mi.hpp"
 #include "src/mpc-sp/package_manager.hpp"
 #include "src/mps-sp/load_vm.hpp"
@@ -29,7 +29,7 @@ void init_ci_poller(mrb_state * vm);
 mrb_value poll_ci_func (mrb_state* state, mrb_value value);
 
 void start(std::string world, std::vector<std::string> vm_pkgs, std::vector<std::string> media_pkgs) {
-	Freeworld::Integration::init();
+	Freeworld::Integration::start();
 	vm = mrb_open();
 	Freeworld::init_core_utils(vm);
 	Freeworld::init_database(vm);
@@ -45,7 +45,7 @@ void start(std::string world, std::vector<std::string> vm_pkgs, std::vector<std:
 
 void stop() {
 	mrb_close(vm);
-	Freeworld::Integration::quit();
+	Freeworld::Integration::stop();
 }
 
 void init_mi_parser(mrb_state* vm) {

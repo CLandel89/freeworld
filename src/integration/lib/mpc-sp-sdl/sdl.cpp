@@ -13,7 +13,7 @@
 
 //this source file implements the following interface headers:
 #include "src/integration-headers/mpc-sp/input.hpp"
-#include "src/integration-headers/mpc-sp/general.hpp"
+#include "src/integration-headers/mpc-mps-sp/system.hpp"
 #include "src/integration-headers/mpc-sp/sprite.hpp"
 #include "src/integration-headers/mpc-sp/video.hpp"
 
@@ -41,7 +41,7 @@ int32_t encode_f (float f) {
 
 // G E N E R A L
 
-void init() {
+void start() {
 	SDL_Init(SDL_INIT_EVERYTHING);
 	window = SDL_CreateWindow("Freeworld", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, window_w, window_h, SDL_WINDOW_OPENGL);
 	window_surf = SDL_GetWindowSurface(window);
@@ -49,7 +49,7 @@ void init() {
 	IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG);
 }
 
-void quit() {
+void stop() {
 	IMG_Quit();
 	SDL_Quit();
 }

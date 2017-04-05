@@ -3,8 +3,8 @@
 
 namespace Freeworld { namespace Integration {
 
-void init();
-void quit();
+void start();
+void stop();
 
 } } //end of namespace Freeworld::Integration
 
