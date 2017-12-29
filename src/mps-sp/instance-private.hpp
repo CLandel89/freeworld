@@ -2,10 +2,6 @@ namespace Freeworld {
 class InstanceMpsSpPrivate;
 }
 
-#if (!defined(MPS)) && (!defined(MPS_SP)) && (!defined(SP))
-#error "Don't use this outside of the Freeworld: MPS, MPS-SP, SP."
-#endif // !defined(MPS_SP)
-
 #ifndef INSTANCE_MPS_SP_PRIVATE_HPP
 #define INSTANCE_MPS_SP_PRIVATE_HPP
 
