@@ -1,4 +1,6 @@
 #include "src/mpc-sp/handle_mi.hpp"
+#include "src/integration-headers/mpc-sp/integration.hpp"
+#include "src/integration-headers/mpc-sp/sprite.hpp"
 
 #include <cstring> //memcpy
 #include <iostream> //cout
@@ -6,12 +8,15 @@
 
 namespace Freeworld {
 
-void* raw; //temporary variable
+using Integration::Sprite;
+using Integration::Wall;
 
-MiParser::MiParser() {
+HandleMi::HandleMi(Freeworld::Integration::IntegrationMpcSp* integration)
+: integration(integration) {
+	raw = NULL; // some IDE's complain when we don't do this...
 }
 
-MiParser::~MiParser() {
+HandleMi::~HandleMi() {
 	for (auto iterator = sprites.begin(); iterator != sprites.end(); iterator++) {
 		Sprite* sprite = iterator->second;
 		if (sprite != NULL)
@@ -26,7 +31,7 @@ MiParser::~MiParser() {
 		delete current_data;
 }
 
-void* MiParser::read(int length) {
+void* HandleMi::read(int length) {
 	if (current_data_length < current_data_read + length) {
 		//not enough data remaining to read
 		return NULL;
@@ -36,11 +41,11 @@ void* MiParser::read(int length) {
 	return result;
 }
 
-void MiParser::read_reset() {
+void HandleMi::read_reset() {
 	current_data_read = current_data_read_reset;
 }
 
-void MiParser::read_reset_set() {
+void HandleMi::read_reset_set() {
 	current_data_read_reset = current_data_read;
 }
 
@@ -62,7 +67,7 @@ void MiParser::read_reset_set() {
 	} \
 	uint8_t u = * (uint8_t*) raw;
 
-#define DECODE_F(i) ((float)i)/65536.f
+#define DECODE_F(i) (((float)i)/65536.f)
 
 #define READ_F32_OR_RESET(f) \
 	raw = read(sizeof(int32_t)); \
@@ -72,7 +77,7 @@ void MiParser::read_reset_set() {
 	} \
 	float f = DECODE_F( * (int32_t*) raw );
 
-void MiParser::parse_mi (int length, uint8_t* data) {
+void HandleMi::handle_mi (int length, uint8_t* data) {
 	if (length == 0) {
 		return;
 	}
@@ -93,6 +98,7 @@ void MiParser::parse_mi (int length, uint8_t* data) {
 		current_data = data;
 		current_data_length = length;
 	}
+	auto video = integration->video;
 	while (current_data_read < current_data_length) {
 		read_reset_set();
 		READ_I32_OR_RESET(type_i)
@@ -100,10 +106,10 @@ void MiParser::parse_mi (int length, uint8_t* data) {
 		if (type == Mi::SET_RESOLUTION) {
 			READ_I32_OR_RESET(w)
 			READ_I32_OR_RESET(h)
-			Freeworld::Integration::set_resolution(w, h);
+			video->set_resolution(w, h);
 		}
 		else if (type == Mi::FRAME_COMPLETED) {
-			Freeworld::Integration::frame_completed();
+			video->frame_completed();
 		}
 		else if (type == Mi::FILL_RECT) {
 			READ_I32_OR_RESET(x)
@@ -113,7 +119,7 @@ void MiParser::parse_mi (int length, uint8_t* data) {
 			READ_U8_OR_RESET(r)
 			READ_U8_OR_RESET(g)
 			READ_U8_OR_RESET(b)
-			Freeworld::Integration::fill_rect(x,y,w,h, r,g,b);
+			video->fill_rect(x,y,w,h, r,g,b);
 		}
 		else if (type == Mi::SPRITE) {
 			READ_I32_OR_RESET(id)
@@ -121,8 +127,8 @@ void MiParser::parse_mi (int length, uint8_t* data) {
 			READ_I32_OR_RESET(y)
 			Sprite* sprite = sprites[id];
 			if (sprite == NULL)
-				sprite = (sprites[id] = new Sprite(id));
-			sprite->draw(x, y);
+				sprite = sprites[id] = new Sprite(id, integration);
+			sprite->draw(x, y, integration);
 		}
 		else if (type == Mi::WALL) {
 			READ_I32_OR_RESET(id)
@@ -134,8 +140,8 @@ void MiParser::parse_mi (int length, uint8_t* data) {
 			READ_I32_OR_RESET(offset_y)
 			Wall* wall = walls[id];
 			if (wall == NULL)
-				wall = (walls[id] = new Wall(id));
-			wall->draw(x, y, w, h, offset_x, offset_y);
+				wall = walls[id] = new Wall(id, integration);
+			wall->draw(x, y, w, h, offset_x, offset_y, integration);
 		}
 		else if (type == Mi::BACKGROUND) {
 		}

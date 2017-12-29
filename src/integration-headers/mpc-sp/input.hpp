@@ -1,5 +1,13 @@
-#ifndef INPUT_H
-#define INPUT_H
+namespace Freeworld { namespace Integration {
+class Input;
+} }
+
+#ifndef FREEWORLD_INTEGRATION_INPUT_HPP
+#define FREEWORLD_INTEGRATION_INPUT_HPP
+
+#include "src/integration-headers/mpc-sp/integration.hpp"
+
+#include <stdint.h>
 
 namespace Freeworld { namespace Integration {
 
@@ -15,10 +23,19 @@ typedef struct {
 	int32_t value;
 } InputEvent;
 
-/** Returns true if an event has been processed ('event' is filled),
- *  false if there are no input events pending. */
-bool poll_input(InputEvent* event);
+class InputPrivate;
+
+class Input {
+public:
+	InputPrivate* priv;
+	IntegrationMpcSp* integration;
+	Input(IntegrationMpcSp* integration);
+	~Input();
+	/** Returns true if an event has been processed ('event' is filled),
+	  * false if there are no input events pending. */
+	bool poll(InputEvent* event);
+};
 
 } } //end of namespace Freeworld::Integration
 
-#endif //INPUT_H
+#endif // FREEWORLD_INTEGRATION_INPUT_HPP

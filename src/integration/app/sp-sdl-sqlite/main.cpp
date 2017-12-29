@@ -2,14 +2,15 @@
 #include <exception>
 
 //use functions from the sp LIB
-#include "src/sp/sp.hpp"
+#include "src/sp/instance.hpp"
 
 int main(int argc, const char** args)
 {
 	std::vector<std::string> pkgs;
 	pkgs.push_back("std");
+	Freeworld::InstanceSp instance;
 	try {
-		Freeworld::start("asdf", pkgs, pkgs);
+		instance.start("asdf", pkgs, pkgs);
 	} catch (const std::string& e) {
 		std::cout << "Freeworld threw an exception:\n" << e << std::endl;
 	} catch (const int& e) {
@@ -20,5 +21,5 @@ int main(int argc, const char** args)
 		auto msg = "Freeworld threw an unhandled exception.";
 		std::cout << msg << std::endl;
 	}
-	Freeworld::stop();
+	instance.stop();
 }

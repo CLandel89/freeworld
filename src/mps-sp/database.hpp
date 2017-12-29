@@ -1,23 +1,23 @@
 namespace Freeworld {
-class CoreUtils;
+class Database;
 }
 
-#ifndef CORE_UTILS_HPP
-#define CORE_UTILS_HPP
+#ifndef DATABASE_HPP
+#define DATABASE_HPP
 
 #include "src/mps-sp/instance.hpp"
 
 namespace Freeworld {
 
-class CoreUtils {
+class Database {
 public:
 	InstanceMpsSp* instance;
-	CoreUtils(InstanceMpsSp* instance);
-	~CoreUtils();
+	Database(InstanceMpsSp* instance);
+	~Database();
 	void init();
 	void quit();
 };
 
 } // end of namespace Freeworld
 
-#endif // CORE_UTILS_HPP
+#endif // DATABASE_HPP

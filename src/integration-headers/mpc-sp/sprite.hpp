@@ -1,18 +1,24 @@
-#ifndef SPRITE_H
-#define SPRITE_H
+namespace Freeworld { namespace Integration {
+class Sprite;
+} }
+
+#ifndef FREEWORLD_INTEGRATION_SPRITE_HPP
+#define FREEWORLD_INTEGRATION_SPRITE_HPP
+
+#include "src/integration-headers/mpc-sp/integration.hpp"
 
 namespace Freeworld { namespace Integration {
 
 class SpritePrivate;
 
 class Sprite {
-	SpritePrivate* priv;
 public:
-	Sprite(int32_t id);
+	SpritePrivate* priv;
+	Sprite(int32_t id, IntegrationMpcSp* integration);
 	~Sprite();
-	void draw (int32_t x, int32_t y);
+	void draw (int32_t x, int32_t y, IntegrationMpcSp* integration);
 };
 
 } } //end of namespace Freeworld::Integration
 
-#endif //SPRITE_H
+#endif //FREEWORLD_INTEGRATION_SPRITE_HPP

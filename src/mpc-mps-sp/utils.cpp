@@ -11,4 +11,8 @@ int32_t string_hash (std::string str) {
 	return result;
 }
 
+int32_t encode_f(float f) {
+	return (int32_t) (f*65536);
+}
+
 } // end of namespace Freeworld

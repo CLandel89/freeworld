@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.6)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -DMPS_SP ")
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
 
@@ -12,8 +12,8 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/dist/lib/")
 add_library (
     "freeworld-mps-sp"
     SHARED
-    "load_vm.cpp"
+    "instance.cpp"
+    "instance-private.cpp"
     "core_utils.cpp"
-    "database/database.cpp"
-    "database/chunks.cpp"
+    "database.cpp"
 )

@@ -11,6 +11,6 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/dist/lib")
 add_library(
     "freeworld-integration-mps-sp-sqlite"
     SHARED
-    "database.cpp"
+    "integration.cpp"
     "chunks.cpp"
 )

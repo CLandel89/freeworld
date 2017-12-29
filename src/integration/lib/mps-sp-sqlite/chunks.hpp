@@ -1,11 +1,29 @@
-#ifndef SQLITE_CHUNKS_H
-#define SQLITE_CHUNKS_H
+#ifndef FREEWORLD_SQLITE_CHUNKS_HPP
+#define FREEWORLD_SQLITE_CHUNKS_HPP
+
+#include <sqlite3.h>
+
+//#include <cstddef>
+
+#include "src/integration-headers/mps-sp/chunks.hpp"
+#include "src/integration-headers/mps-sp/integration.hpp"
 
 namespace Freeworld { namespace Integration {
 
-void prepare_chunks();
-void finalize_chunks();
+class ChunksPrivate {
+public:
+	IntegrationMpsSp* integration;
+	sqlite3_stmt* open_read_stmt;
+	BinData* lastData = nullptr;
+	int last_row_result;
+
+	ChunksPrivate(IntegrationMpsSp* integration);
+	~ChunksPrivate();
+	void delete_lastData();
+	void prepare_chunks();
+	void finalize_chunks();
+};
 
 } } //end of namespace Freeworld::Integration
 
-#endif // SQLITE_CHUNKS_H
+#endif // FREEWORLD_SQLITE_CHUNKS_HPP

@@ -3,9 +3,11 @@
 //SDL2_gfx
 #include <SDL2/SDL2_rotozoom.h>
 
-#include "src/mpc-sp/package_manager.hpp"
-#include "src/integration/lib/mpc-sp-sdl/system.hpp"
-//helper functions and global variables:
+#include "src/integration-headers/mpc-sp/integration.hpp"
+#include "src/mpc-sp/instance.hpp"
+#include "src/mpc-sp/media_manager.hpp"
+#include "src/integration/lib/mpc-sp-sdl/integration.hpp"
+//This source file implements the following header:
 #include "src/integration-headers/mpc-sp/wall.hpp"
 
 namespace Freeworld { namespace Integration {
@@ -13,12 +15,13 @@ namespace Freeworld { namespace Integration {
 class WallPrivate {
 public:
 	SDL_Surface* img = NULL;
-
 };
 
-Wall::Wall(int32_t id) {
+Wall::Wall(int32_t id, IntegrationMpcSp* integration) {
+	auto& inst = * integration->instance;
+	auto& ip = * integration->priv;
 	priv = new WallPrivate();
-	std::string fn = Freeworld::get_package_manager()->fn_for_hash(id);
+	std::string fn = inst.media_manager->fn_for_hash(id);
 	if (fn.empty()) {
 		priv->img = NULL;
 		return;
@@ -28,7 +31,7 @@ Wall::Wall(int32_t id) {
 		priv->img = NULL;
 		return;
 	}
-	priv->img = zoomSurface(tmp, resolution_factor, resolution_factor, SMOOTHING_ON);
+	priv->img = zoomSurface(tmp, ip.resolution_factor, ip.resolution_factor, SMOOTHING_ON);
 	SDL_FreeSurface(tmp);
 }
 
@@ -41,16 +44,17 @@ Wall::~Wall() {
 
 //#define DEBUG_ME
 
-void Wall::draw(int32_t x, int32_t y, int32_t w, int32_t h, int32_t offset_x, int32_t offset_y) {
+void Wall::draw(int32_t x, int32_t y, int32_t w, int32_t h, int32_t offset_x, int32_t offset_y, IntegrationMpcSp* integration) {
+	auto& ip = * integration->priv;
 	SDL_Rect dstrect, srcrect;
-	window_coordinates(x,y, &dstrect);
+	ip.window_coordinates(x,y, &dstrect);
 	int32_t screen_x=dstrect.x, screen_y=dstrect.y;
-	int32_t screen_w = dstrect.w =  (int32_t)(w*resolution_factor);
-	int32_t screen_h = dstrect.h =  (int32_t)(h*resolution_factor);
+	int32_t screen_w = dstrect.w =  (int32_t)(w*ip.resolution_factor);
+	int32_t screen_h = dstrect.h =  (int32_t)(h*ip.resolution_factor);
 #ifndef DEBUG_ME //if in debugging/highlighting mode, always back up the wall
 	if (priv->img == NULL) {
 #endif
-		SDL_FillRect(window_surf, &dstrect, SDL_MapRGB(window_px_form, 255, 0, 0));
+		SDL_FillRect(ip.window_surf, &dstrect, SDL_MapRGB(ip.window_px_form, 255, 0, 255));
 #ifndef DEBUG_ME
 		return;
 	}
@@ -65,18 +69,17 @@ void Wall::draw(int32_t x, int32_t y, int32_t w, int32_t h, int32_t offset_x, in
 		dstrect.h = srcrect.h = screen_h;
 
 	// translate offset to a valid range in the screen resolution
-	offset_x = (int32_t)(offset_x*resolution_factor);
+	offset_x = (int32_t)(offset_x*ip.resolution_factor);
 	offset_x %= priv->img->w;
 	if (offset_x<0) offset_x+=priv->img->w;
-	offset_y = (int32_t)(offset_y*resolution_factor);
+	offset_y = (int32_t)(offset_y*ip.resolution_factor);
 	offset_y %= priv->img->h;
 	if (offset_y<0) offset_y+=priv->img->h;
 
 	// upper left corner
 	srcrect.x = offset_x;
 	srcrect.y = offset_y;
-	SDL_BlitSurface(priv->img, &srcrect, window_surf, &dstrect);
-//	return;
+	SDL_BlitSurface(priv->img, &srcrect, ip.window_surf, &dstrect);
 
 	int32_t next_x = screen_x + priv->img->w - offset_x, next_y = screen_y;
 
@@ -84,7 +87,7 @@ void Wall::draw(int32_t x, int32_t y, int32_t w, int32_t h, int32_t offset_x, in
 	while (next_x < screen_x + screen_w - priv->img->w) {
 		dstrect.x = next_x;
 		srcrect.x = 0;
-		SDL_BlitSurface(priv->img, &srcrect, window_surf, &dstrect);
+		SDL_BlitSurface(priv->img, &srcrect, ip.window_surf, &dstrect);
 		next_x += priv->img->w;
 	}
 
@@ -95,7 +98,7 @@ void Wall::draw(int32_t x, int32_t y, int32_t w, int32_t h, int32_t offset_x, in
 	srcrect.x = 0;
 	srcrect.y = offset_y;
 	if (dstrect.w>0)
-		SDL_BlitSurface(priv->img, &srcrect, window_surf, &dstrect);
+		SDL_BlitSurface(priv->img, &srcrect, ip.window_surf, &dstrect);
 
 	// left part (excluding upper left and lower left corners)
 	srcrect.x = offset_x;
@@ -104,7 +107,7 @@ void Wall::draw(int32_t x, int32_t y, int32_t w, int32_t h, int32_t offset_x, in
 	while (next_y < screen_y + screen_h - priv->img->h) {
 		dstrect.x = screen_x;
 		dstrect.y = next_y;
-		SDL_BlitSurface(priv->img, &srcrect, window_surf, &dstrect);
+		SDL_BlitSurface(priv->img, &srcrect, ip.window_surf, &dstrect);
 		next_y += priv->img->h;
 	}
 
@@ -119,7 +122,7 @@ void Wall::draw(int32_t x, int32_t y, int32_t w, int32_t h, int32_t offset_x, in
 		while (next_y < screen_y + screen_h - priv->img->h) {
 			dstrect.x = next_x;
 			dstrect.y = next_y;
-			SDL_BlitSurface(priv->img, &srcrect, window_surf, &dstrect);
+			SDL_BlitSurface(priv->img, &srcrect, ip.window_surf, &dstrect);
 			next_y += priv->img->h;
 		}
 		next_x += priv->img->w;
@@ -133,7 +136,7 @@ void Wall::draw(int32_t x, int32_t y, int32_t w, int32_t h, int32_t offset_x, in
 	while (next_y < screen_y + screen_h - priv->img->h) {
 		dstrect.x = next_x;
 		dstrect.y = next_y;
-		SDL_BlitSurface(priv->img, &srcrect, window_surf, &dstrect);
+		SDL_BlitSurface(priv->img, &srcrect, ip.window_surf, &dstrect);
 		next_y += priv->img->h;
 	}
 
@@ -149,7 +152,7 @@ void Wall::draw(int32_t x, int32_t y, int32_t w, int32_t h, int32_t offset_x, in
 	dstrect.w = srcrect.w;
 	dstrect.h = srcrect.h;
 	if (dstrect.w>0 && dstrect.h>0)
-		SDL_BlitSurface(priv->img, &srcrect, window_surf, &dstrect);
+		SDL_BlitSurface(priv->img, &srcrect, ip.window_surf, &dstrect);
 
 	// lower part (excluding lower left and lower right corners)
 	srcrect.x = 0;
@@ -159,7 +162,7 @@ void Wall::draw(int32_t x, int32_t y, int32_t w, int32_t h, int32_t offset_x, in
 	while (next_x < screen_x + screen_w - priv->img->w) {
 		dstrect.x = next_x;
 		dstrect.y = next_y;
-		SDL_BlitSurface(priv->img, &srcrect, window_surf, &dstrect);
+		SDL_BlitSurface(priv->img, &srcrect, ip.window_surf, &dstrect);
 		next_x += priv->img->w;
 	}
 
@@ -169,17 +172,17 @@ void Wall::draw(int32_t x, int32_t y, int32_t w, int32_t h, int32_t offset_x, in
 	dstrect.x = next_x;
 	dstrect.y = next_y;
 	if (dstrect.w>0 && dstrect.h>0)
-		SDL_BlitSurface(priv->img, &srcrect, window_surf, &dstrect);
+		SDL_BlitSurface(priv->img, &srcrect, ip.window_surf, &dstrect);
 
 #ifdef DEBUG_ME
 	dstrect = {screen_x,screen_y, screen_w, 2};
-	SDL_FillRect(window_surf, &dstrect, SDL_MapRGB(window_px_form, 255, 0, 0));
+	SDL_FillRect(ip.window_surf, &dstrect, SDL_MapRGB(ip.window_px_form, 255, 255, 0));
 	dstrect = {screen_x,screen_y, 2, screen_h};
-	SDL_FillRect(window_surf, &dstrect, SDL_MapRGB(window_px_form, 255, 0, 0));
+	SDL_FillRect(ip.window_surf, &dstrect, SDL_MapRGB(ip.window_px_form, 255, 255, 0));
 	dstrect = {screen_x+screen_w-2,screen_y, 2, screen_h};
-	SDL_FillRect(window_surf, &dstrect, SDL_MapRGB(window_px_form, 255, 0, 0));
+	SDL_FillRect(ip.window_surf, &dstrect, SDL_MapRGB(ip.window_px_form, 255, 255, 0));
 	dstrect = {screen_x,screen_y+screen_h-2, screen_w, 2};
-	SDL_FillRect(window_surf, &dstrect, SDL_MapRGB(window_px_form, 255, 0, 0));
+	SDL_FillRect(ip.window_surf, &dstrect, SDL_MapRGB(ip.window_px_form, 255, 255, 0));
 #endif
 }
 

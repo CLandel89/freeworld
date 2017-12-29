@@ -1,3 +1,8 @@
+#include "src/integration/lib/mpc-sp-sdl/input.hpp"
+#include "src/mpc-mps-sp/utils.hpp"
+//this source file implements the following interface header:
+#include "src/integration-headers/mpc-sp/input.hpp"
+
 //TODO: don't use std::exit here!!
 #include <cstdlib>
 #include <iostream>
@@ -5,26 +10,18 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_keycode.h>
 
-#include "src/integration/lib/mpc-sp-sdl/system.hpp"
-//this source file implements the following interface headers:
-#include "src/integration-headers/mpc-sp/input.hpp"
-
 namespace Freeworld { namespace Integration {
 
-SDL_Keycode jump = SDLK_SPACE;
-SDL_Keycode walljump = SDLK_LALT;
-SDL_Keycode up = SDLK_UP;
-SDL_Keycode down = SDLK_DOWN;
-SDL_Keycode left = SDLK_LEFT;
-SDL_Keycode right = SDLK_RIGHT;
-SDL_Keycode a = SDLK_a;
-SDL_Keycode b = SDLK_s;
-SDL_Keycode c = SDLK_z;
-SDL_Keycode d = SDLK_x;
+Input::Input(IntegrationMpcSp* integration) {
+	this->integration = integration;
+	priv = new InputPrivate();
+}
 
-float x_tmp = 0, y_tmp = 0;
+Input::~Input() {
+	delete priv;
+}
 
-bool poll_input(InputEvent* event) {
+bool Input::poll(InputEvent* event) {
 	SDL_Event ev;
 	if (! SDL_PollEvent(&ev))
 		return false;
@@ -36,88 +33,88 @@ bool poll_input(InputEvent* event) {
 		break;
 	case SDL_KEYDOWN:
 		if (ev.key.repeat!=0)
-			return poll_input(event);
+			return poll(event);
 		event->type = CiType::PRESS;
-		if (ev.key.keysym.sym == jump)
+		if (ev.key.keysym.scancode == priv->jump)
 			event->value = CiButton::JUMP;
-		else if (ev.key.keysym.sym == walljump)
+		else if (ev.key.keysym.scancode == priv->walljump)
 			event->value = CiButton::WALLJUMP;
-		else if (ev.key.keysym.sym == up) {
+		else if (ev.key.keysym.scancode == priv->up) {
 			event->type = CiType::AXIS_Y;
 			event->value = encode_f(-1);
-			y_tmp = -1;
+			priv->y_tmp = -1;
 		}
-		else if (ev.key.keysym.sym == down) {
+		else if (ev.key.keysym.scancode == priv->down) {
 			event->type = CiType::AXIS_Y;
 			event->value = encode_f(1);
-			y_tmp = 1;
+			priv->y_tmp = 1;
 		}
-		else if (ev.key.keysym.sym == left) {
+		else if (ev.key.keysym.scancode == priv->left) {
 			event->type = CiType::AXIS_X;
 			event->value = encode_f(-1);
-			x_tmp = -1;
+			priv->x_tmp = -1;
 		}
-		else if (ev.key.keysym.sym == right) {
+		else if (ev.key.keysym.scancode == priv->right) {
 			event->type = CiType::AXIS_X;
 			event->value = encode_f(1);
-			x_tmp = 1;
+			priv->x_tmp = 1;
 		}
-		else if (ev.key.keysym.sym == a)
+		else if (ev.key.keysym.scancode == priv->a)
 			event->value = CiButton::A;
-		else if (ev.key.keysym.sym == b)
+		else if (ev.key.keysym.scancode == priv->b)
 			event->value = CiButton::B;
-		else if (ev.key.keysym.sym == c)
+		else if (ev.key.keysym.scancode == priv->c)
 			event->value = CiButton::C;
-		else if (ev.key.keysym.sym == d)
+		else if (ev.key.keysym.scancode == priv->d)
 			event->value = CiButton::D;
 		else
-			return poll_input(event);
+			return poll(event);
 		return true;
 	case SDL_KEYUP:
 		if (ev.key.repeat!=0)
-			return poll_input(event);
+			return poll(event);
 		event->type = CiType::RELEASE;
-		if (ev.key.keysym.sym == jump)
+		if (ev.key.keysym.scancode == priv->jump)
 			event->value = CiButton::JUMP;
-		else if (ev.key.keysym.sym == walljump)
+		else if (ev.key.keysym.scancode == priv->walljump)
 			event->value = CiButton::WALLJUMP;
-		else if (ev.key.keysym.sym == up) {
-			if (y_tmp != -1)
-				return false;
+		else if (ev.key.keysym.scancode == priv->up) {
+			if (priv->y_tmp != -1)
+				return poll(event);
 			event->type = CiType::AXIS_Y;
 			event->value = encode_f(0);
 		}
-		else if (ev.key.keysym.sym == down) {
-			if (y_tmp != 1)
-				return false;
+		else if (ev.key.keysym.scancode == priv->down) {
+			if (priv->y_tmp != 1)
+				return poll(event);
 			event->type = CiType::AXIS_Y;
 			event->value = encode_f(0);
 		}
-		else if (ev.key.keysym.sym == left) {
-			if (x_tmp != -1)
-				return false;
+		else if (ev.key.keysym.scancode == priv->left) {
+			if (priv->x_tmp != -1)
+				return poll(event);
 			event->type = CiType::AXIS_X;
 			event->value = encode_f(0);
 		}
-		else if (ev.key.keysym.sym == right) {
-			if (x_tmp != 1)
-				return false;
+		else if (ev.key.keysym.scancode == priv->right) {
+			if (priv->x_tmp != 1)
+				return poll(event);
 			event->type = CiType::AXIS_X;
 			event->value = encode_f(0);
 		}
-		else if (ev.key.keysym.sym == a)
+		else if (ev.key.keysym.scancode == priv->a)
 			event->value = CiButton::A;
-		else if (ev.key.keysym.sym == b)
+		else if (ev.key.keysym.scancode == priv->b)
 			event->value = CiButton::B;
-		else if (ev.key.keysym.sym == c)
+		else if (ev.key.keysym.scancode == priv->c)
 			event->value = CiButton::C;
-		else if (ev.key.keysym.sym == d)
+		else if (ev.key.keysym.scancode == priv->d)
 			event->value = CiButton::D;
 		else
-			return poll_input(event);
+			return poll(event);
 		return true;
 	}
-	return poll_input(event);
+	return poll(event);
 }
 
 } } //end of namespace Freeworld:Integration

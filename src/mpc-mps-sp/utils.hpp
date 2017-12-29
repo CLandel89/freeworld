@@ -1,12 +1,14 @@
-#ifndef UTILS_H
-#define UTILS_H
+#ifndef UTILS_HPP
+#define UTILS_HPP
 
+#include <stdint.h>
 #include <string>
 
 namespace Freeworld {
 
 int32_t string_hash (std::string str);
+int32_t encode_f (float f);
 
 } // end of namespace Freeworld
 
-#endif //UTILS_H
+#endif // UTILS_HPP

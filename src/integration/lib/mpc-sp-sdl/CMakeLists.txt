@@ -11,7 +11,7 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/dist/lib")
 add_library(
     "freeworld-integration-mpc-sp-sdl"
     SHARED
-    "system.cpp"
+    "integration.cpp"
     "input.cpp"
     "sprite.cpp"
     "video.cpp"
