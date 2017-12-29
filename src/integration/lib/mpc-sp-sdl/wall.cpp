@@ -107,9 +107,21 @@ void Wall::draw(int32_t x, int32_t y, int32_t w, int32_t h, int32_t offset_x, in
 	srcrect.x = offset_x;
 	srcrect.y = 0;
 	next_y = screen_y + priv->img->h - offset_y;
+	if (screen_w-offset_x >= priv->img->w)
+		next_w = priv->img->w;
+	else
+		next_w = screen_w-offset_x;
+	if (screen_h-offset_y >= priv->img->h)
+		next_h = priv->img->h;
+	else
+		next_h = screen_h-offset_y;
 	while (next_y < screen_y + screen_h - priv->img->h) {
 		dstrect.x = screen_x;
 		dstrect.y = next_y;
+		dstrect.w = next_w;
+		dstrect.h = next_h;
+		srcrect.w = next_w;
+		srcrect.h = next_h;
 		SDL_BlitSurface(priv->img, &srcrect, ip.window_surf, &dstrect);
 		next_y += priv->img->h;
 	}
