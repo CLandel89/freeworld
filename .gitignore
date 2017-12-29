@@ -11,6 +11,10 @@ Freeworld.creator.user
 Freeworld.files
 Freeworld.includes
 
+#generated when exported to Code::Blocks project (cmake -G ...)
+Project.cbp
+Project.layout
+
 #generated when exported to Eclipse CDT project (cmake -G ...)
 .cproject
 .project
@@ -21,3 +25,4 @@ rules.ninja
 
 #generated temporarily by vim
 *.swp
+

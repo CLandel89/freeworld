@@ -3,9 +3,13 @@
 
 //use functions from the sp LIB
 #include "src/sp/instance.hpp"
+//helper function for IDE's that can't change dir correctly
+//(looking at you, Code::Blocks)
+#include "fixdir.hpp"
 
 int main(int argc, const char** args)
 {
+	fixdir(args);
 	std::vector<std::string> pkgs;
 	pkgs.push_back("std");
 	Freeworld::InstanceSp instance;
