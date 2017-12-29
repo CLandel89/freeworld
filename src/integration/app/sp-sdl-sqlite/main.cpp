@@ -16,11 +16,9 @@ int main(int argc, const char** args)
 		std::cout << "Freeworld threw an exception: " << e << std::endl;
 	} catch (const std::exception& e) {
 		std::cout << "Freeworld threw an exception:\n" << e.what() << std::endl;
-		throw e;
 	} catch (...) {
 		auto msg = "Freeworld threw an unhandled exception.";
 		std::cout << msg << std::endl;
-		throw msg;
 	}
 	Freeworld::stop();
 }
