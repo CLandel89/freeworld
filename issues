@@ -1,3 +1,4 @@
+ - handle_mi.cpp: das lässt sich effizienter gestalten als "read_or_reset;read_or_reset;..."
  - package-manager.cpp: exception müssen const &, keine java-shit-way-of-life get-methode!
  - git grep encode sowie decode: beide müssen ins Modul src/mpc-mps-sp
  - impl-headers/mpc-sp: falsche bezeichner
