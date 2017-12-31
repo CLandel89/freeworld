@@ -1,13 +1,13 @@
 class Player < Entity
 
-  include MovingEntity
+  include EntityMoving
 
   attr_accessor :button
   attr_reader :graphics
 
   def initialize x,y,z,w,h
     super x,y,z,w,h
-    me_initialize
+    em_initialize
     @graphics = Graphics.new
     @control = Control.new self
     @sprite_id = sprite "std", "test"
@@ -18,16 +18,16 @@ class Player < Entity
 
   def action
     @control.action
-    @me_sx = @control.a_x * 30
-    @me_sy = @control.a_y * 30
+    @em_sx = @control.a_x * 30
+    @em_sy = @control.a_y * 30
     #in case you want to test the squashing effect
 #    @x += @control.a_x
 #    @y += @control.a_y
-    @squashed = me_action
+    @squashed = em_action
     @frame_counter += 1
     #smooth look-ahead and player in center approximation
-    @la_x = (@la_x*7 + @me_sx*8) / 8
-    @la_y = (@la_y*7 + @me_sy*8) / 8
+    @la_x = (@la_x*7 + @em_sx*8) / 8
+    @la_y = (@la_y*7 + @em_sy*8) / 8
     @cx = (@cx*3 + @x + @w/2) / 4
     @cy = (@cy*3 + @y + @h/2) / 4
     @graphics.cam_x = @cx + @la_x
