@@ -3,12 +3,12 @@ CoreUtils.add_enum 'CiButton', 'enums/ci_button.enum'
 
 class Control
 
-  attr_reader :a_x, :a_y
+  attr_reader :x, :y, :b
 
   def initialize player
     @player = player
-    @a_x, @a_y = 0.0, 0.0
-    @b = Hash.new CiType::RELEASE
+    @x, @y = 0.0, 0.0
+    @b = Hash.new false
   end
 
   def action
@@ -17,12 +17,14 @@ class Control
       ci_type = ci[0].ord | (ci[1].ord << 8) | (ci[2].ord << 16) | (ci[3].ord << 24)
       ci_value = ci[4].ord | (ci[5].ord << 8) | (ci[6].ord << 16) | (ci[7].ord << 24)
       case ci_type
-      when CiType::PRESS, CiType::RELEASE
-        @b[ci_value] = ci_type
+      when CiType::PRESS
+        @b[ci_value] = true
+      when CiType::RELEASE
+        @b[ci_value] = false
       when CiType::AXIS_X
-        @a_x = decode_f ci_value
+        @x = decode_f ci_value
       when CiType::AXIS_Y
-        @a_y = decode_f ci_value
+        @y = decode_f ci_value
       end
     end
   end
