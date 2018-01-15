@@ -16,8 +16,9 @@ public:
 	     right = SDL_SCANCODE_RIGHT,
 	     a = SDL_SCANCODE_A,
 	     b = SDL_SCANCODE_S,
-	     c = SDL_SCANCODE_Y,
-	     d = SDL_SCANCODE_X;
+	     c = SDL_SCANCODE_Z,
+	     d = SDL_SCANCODE_X,
+	     escape = SDL_SCANCODE_ESCAPE;
 };
 
 } } // end of namespace Freeworld::Integration

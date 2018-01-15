@@ -67,7 +67,11 @@ bool Input::poll(InputEvent* event) {
 			event->value = CiButton::C;
 		else if (ev.key.keysym.scancode == priv->d)
 			event->value = CiButton::D;
+		else if (ev.key.keysym.scancode == priv->escape)
+			event->value = CiButton::ESCAPE;
 		else
+			//this SDL event is not from a defined key
+			//so we need to process the next SDL event
 			return poll(event);
 		return true;
 	case SDL_KEYUP:
@@ -110,6 +114,8 @@ bool Input::poll(InputEvent* event) {
 			event->value = CiButton::C;
 		else if (ev.key.keysym.scancode == priv->d)
 			event->value = CiButton::D;
+		else if (ev.key.keysym.scancode == priv->escape)
+			event->value = CiButton::ESCAPE;
 		else
 			return poll(event);
 		return true;
