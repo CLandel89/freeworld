@@ -1,9 +1,9 @@
-JUMP = 0,
-WALLJUMP = 1,
+JUMP = 1,
+WALLJUMP = 2,
 
-A = 2,
-B = 3,
-C = 4,
-D = 5,
+A = 3,
+B = 4,
+C = 5,
+D = 6,
 
-ESCAPE = 6,
+ESCAPE = 7,

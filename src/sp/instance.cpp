@@ -1,6 +1,7 @@
 #include "src/sp/instance.hpp"
 #include "src/integration-headers/mpc-sp/input.hpp"
 #include "src/integration-headers/mps-sp/integration.hpp"
+#include "src/mpc-mps-sp/utils.hpp"
 #include "src/mpc-sp/handle_mi.hpp"
 #include "src/mpc-sp/instance.hpp"
 #include "src/mps-sp/instance.hpp"
@@ -59,7 +60,11 @@ mrb_value poll_ci_func (mrb_state* vm, mrb_value value) {
 	// some neat stuff with lambda expression or virtual function
 	auto i = vm_instance_map[vm]->sp->mpcSp->integration->input;
 	if (i->poll(&ie)) {
-		return mrb_str_new(vm, (char*)&ie, 8);
+		uint64_t buf;
+		uint8_t* ptr = (uint8_t*)&buf;
+		write_le((int32_t)ie.type, ptr);
+		write_le(ie.value.raw, ptr+4);
+		return mrb_str_new(vm, (char*)ptr, 8);
 	}
 	return mrb_str_new(vm, NULL, 0);
 }

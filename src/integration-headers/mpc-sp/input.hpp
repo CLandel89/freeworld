@@ -19,8 +19,11 @@ enum CiButton {
 };
 
 typedef struct {
-	int32_t type;
-	int32_t value;
+	CiType type;
+	union {
+		int32_t raw;
+		CiButton button;
+	} value;
 } InputEvent;
 
 class InputPrivate;
