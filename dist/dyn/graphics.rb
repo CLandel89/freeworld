@@ -16,8 +16,8 @@ class Graphics
   end
 
   def set_bg_color r,g,b
-    @mi += (encode_i32 Mi::BACKGROUND_COLOR)
-      + (encode_u8 r) + (encode_u8 g) + (encode_u8 b)
+    @mi += (encode_i32 Mi::BACKGROUND_COLOR) +
+           (encode_u8 r) + (encode_u8 g) + (encode_u8 b)
   end
   def unset_bg_color
     @mi += encode_i32 Mi::UNSET_BACKGROUND_COLOR
@@ -66,6 +66,13 @@ class Graphics
       (encode_i32 x) + (encode_i32 y) +
       (encode_i32 w) + (encode_i32 h) +
       (encode_u8 r) + (encode_u8 g) + (encode_u8 b)
+  end
+
+  # draw a filled rectangle with the specified
+  # colour in the region specified as a fraction
+  # of the screen
+  def fill_rect_frac x,y,xf,yf, r,g,b
+    fill_rect_raw x*@res_w,y*@res_h,xf*@res_w,yf*@res_h, r,g,b
   end
 
   def draw_sprite_raw sprite_id, x, y, w, h

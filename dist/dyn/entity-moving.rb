@@ -8,7 +8,8 @@ module EntityMoving
   # has the entity bumped into an object?
   attr_accessor :em_bumpl, :em_bumpr, :em_bumpu, :em_bumpd
 
-  def em_initialize
+  def initialize x,y,z,w,h
+    super
     #the speed
     @em_sx = @em_sy = 0
     @em_bumpl = @em_bumpr = @em_bumpu = @em_bumpd = nil

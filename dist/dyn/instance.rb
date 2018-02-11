@@ -32,6 +32,9 @@ class Instance
         $chunk_manager.each_entity proc {|e| g.draw e}
         #draw player
         g.draw p
+        #draw UI
+        p.gui.draw
+        #that's all, folks!
         g.complete_frame
       end
       #TODO: implement constant frame rate

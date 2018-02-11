@@ -17,22 +17,28 @@ module EntityVertical
     end
   end
 
-  def ev_initialize
-    ep_initialize
+  def initialize x,y,z,w,h
+    super
     @ev_fallspeed = 100
     @ev_runspeed = 50
     @ev_jumpheight = 500
     @jumpheight_remaining = 0
     @jumped = false
+    @control_dummy = ControlDummy.new
   end
 
   #returns true if entity is stuck
   def ev_action
+    if (self.respond_to? :gui) && self.gui.shown
+      c = @control_dummy
+    else
+      c = self.control
+    end
 	# on ground or mid-air?
     ds,us,de,ue = $instance.space_DU self
     if ds<=2
       # on ground
-      if self.control.b[CiButton::JUMP] && !@jumped
+      if c.b[CiButton::JUMP] && !@jumped
         # start a jump
         @jumped = true
         @jumpheight_remaining = @ev_jumpheight
@@ -52,12 +58,12 @@ module EntityVertical
 	  @jumpheight_remaining -= jh_p
 	end
 	#cancel jump (on button release)
-	if !self.control.b[CiButton::JUMP]
+	if !c.b[CiButton::JUMP]
 	  @jumpheight_remaining = 0
 	  @jumped = false
 	end
     # run/fly
-    self.ep_fx += @ev_runspeed * self.control.x
+    self.ep_fx += @ev_runspeed * c.x
     result = ep_action
     return result
   end

@@ -2,13 +2,13 @@ class Player < Entity
 
   include EntityVertical
 
-  attr_reader :graphics, :control
+  attr_reader :graphics, :control, :gui
 
   def initialize x,y,z,w,h
     super x,y,z,w,h
-    ev_initialize
     @graphics = Graphics.new
     @control = Control.new self
+    @gui = Gui.new self
     @sprite_id = sprite "std", "test"
     @frame_counter = 0
     @la_x, @la_y = 0,0
@@ -39,6 +39,7 @@ class Player < Entity
       #"Ouch!"
       g.fill_rect_raw 0,0,(g.res_w),(g.res_h), 255,0,0
     end
+    gui.draw
   end
 
 end

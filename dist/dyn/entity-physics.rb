@@ -19,8 +19,8 @@ module EntityPhysics
     end
   end
 
-  def ep_initialize
-    em_initialize
+  def initialize x,y,z,w,h
+    super
     @ep_fx = 0
     @ep_fy = 0
   end
