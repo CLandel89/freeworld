@@ -2,7 +2,6 @@ class Player < Entity
 
   include EntityVertical
 
-  attr_accessor :button
   attr_reader :graphics, :control
 
   def initialize x,y,z,w,h
