@@ -1,14 +1,20 @@
 class GuiElement
-  attr_accessor :x,:y, :sx, :sy, :shown
-  attr_accessor :children, :parent
+  attr_accessor :x,:y, :sx, :sy
+  attr_accessor :shown, :focussed
+  attr_accessor :children, :parent, :selected
   def initialize
-    #maybe a good default, if not, inheriting classes
-    #can set this after after "super"
+    # maybe good defaults; if not, inheriting classes
+    # can set this after after "super()"
     margin = 1/0x80
     @sx, @sy = 1-2*margin, 1-2*margin
     center
-    @children = Array.new
+    # state
     @shown = true
+    @children = Array.new
+    @selected = 0
+    #submenus (children) need to know when they should
+    #accept input
+    @focussed = false
   end
 
   #centers self into parent, if it is not nil,
@@ -56,6 +62,33 @@ class GuiElement
     graphics.fill_rect_raw br-strength,bt,         strength,ly,       r,g,b
   end
 
+  def control_hook ci_t, ci_v
+    # optimised condition for other cases
+    return if !self.shown
+    # optimised condition for other cases
+    return if !self.focussed
+    # the navigation/control cases
+    case ci_t
+    when CiType::PRESS
+      case ci_v
+      when CiButton::JUMP
+        # enter selected element
+        se = self.children[self.selected]
+        #se.enter if se!=nil && se.respond_to? :enter
+      end
+    when CiType::MOUSE
+      #select a child, if selection is implemented and the
+      #mouse is hovering over a child
+      px = ci_v[0]
+      py = ci_v[1]
+      self.children.each_with_index do |c,i|
+        if px>=c.x && px<=c.x+c.sx && py>=c.y && py<=c.y+c.sy
+          self.selected=i
+        end
+      end
+    end
+  end
+
   def << child
     @children << child
     child.parent = self
@@ -98,6 +131,13 @@ class GuiElement
 	else
 	  @graphics=g
 	end
+  end
+
+  def each_element func
+    func.call self
+    @children.each do |c|
+      c.each_element func
+    end
   end
 
 end

@@ -14,10 +14,10 @@ class GuiButton < GuiElement
     @hooks.each do |hook|
       if !hook.respond_to? :button_hook
         debug "#{self}: Warning: #{hook} does not respond to #{:button_hook}!"
-	  else
+      else
         hook.button_hook self
-	  end
-	end
+      end
+    end
   end
 
   def << hook

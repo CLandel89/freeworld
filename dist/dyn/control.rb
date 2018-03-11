@@ -4,20 +4,36 @@ CoreUtils.add_enum 'CiButton', 'enums/ci_button.enum'
 class Control
 
   attr_reader :x, :y, :b
+  attr_reader :mouse_x, :mouse_y
 
   def initialize player
     @player = player
     @x, @y = 0.0, 0.0
     @b = Hash.new false
+    @mouse_x = 0.0
+    @mouse_y = 0.0
     @hooks = Array.new
+  end
+
+  #binary helper functions
+  def byteu str, b
+    result = str[b].ord
+    result += 0x100 if result<0
+    return result
+  end
+  def int32 str, i
+    return (byteu str,(0+i)) |
+      ((byteu str,(1+i))<<8) |
+      ((byteu str,(2+i))<<16) |
+      ((byteu str,(3+i))<<24)
   end
 
   def action
     #a poll is either 8 bytes (2 variables) or empty
     while (ci = poll_ci) != '' do
       #extract the values from this control instruction
-      ci_type = ci[0].ord | (ci[1].ord << 8) | (ci[2].ord << 16) | (ci[3].ord << 24)
-      ci_value = ci[4].ord | (ci[5].ord << 8) | (ci[6].ord << 16) | (ci[7].ord << 24)
+      ci_type = int32 ci,0
+      ci_value = int32 ci,4
       #change exported state representation
       case ci_type
       when CiType::PRESS
@@ -28,6 +44,10 @@ class Control
         @x = decode_f ci_value
       when CiType::AXIS_Y
         @y = decode_f ci_value
+      when CiType::MOUSE
+        @mouse_x = (ci_value&0xffff) / 0xffff
+        @mouse_y = ((ci_value>>16)&0xffff) / 0xffff
+        ci_value = [@mouse_x, @mouse_y]
       end
       #handle hooks
       @hooks.each do |hook|

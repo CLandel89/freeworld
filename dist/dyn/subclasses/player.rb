@@ -2,7 +2,7 @@ class Player < Entity
 
   include EntityVertical
 
-  attr_reader :graphics, :control, :gui
+  attr_reader :graphics, :control, :gui, :frame_counter
 
   def initialize x,y,z,w,h
     super x,y,z,w,h

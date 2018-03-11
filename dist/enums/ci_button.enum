@@ -7,3 +7,9 @@ C = 5,
 D = 6,
 
 ESCAPE = 7,
+
+MOUSEL = 8,
+MOUSER = 9,
+MOUSEM = 10,
+MOUSEU = 11,
+MOUSED = 12,

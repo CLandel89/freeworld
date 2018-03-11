@@ -1,4 +1,5 @@
 #include "src/integration/lib/mpc-sp-sdl/input.hpp"
+#include "src/integration/lib/mpc-sp-sdl/integration.hpp"
 #include "src/mpc-mps-sp/utils.hpp"
 //this source file implements the following interface header:
 #include "src/integration-headers/mpc-sp/input.hpp"
@@ -12,6 +13,31 @@
 
 namespace Freeworld { namespace Integration {
 
+// internal definitions
+
+CiButton ciButton (SDL_MouseButtonEvent& mbev) {
+	switch (mbev.button) {
+	case 1:
+		return CiButton::MOUSEL;
+	case 2:
+		return CiButton::MOUSEM;
+	case 3:
+		return CiButton::MOUSER;
+	}
+	//unknown sdl button => left mouse button
+	return CiButton::MOUSEL;
+}
+
+CiButton ciButton (SDL_MouseWheelEvent& mwev) {
+	if (mwev.y>0)
+		return CiButton::MOUSEU;
+	else if (mwev.y<0)
+		return CiButton::MOUSED;
+	return (CiButton)0;
+}
+
+// exported definitions
+
 Input::Input(IntegrationMpcSp* integration) {
 	this->integration = integration;
 	priv = new InputPrivate();
@@ -24,6 +50,13 @@ Input::~Input() {
 bool Input::poll(InputEvent* event) {
 	SDL_Event ev;
 	while (SDL_PollEvent(&ev)) {
+		CiButton button;
+		float x, y;
+		auto& ip = integration->priv;
+		uint32_t lw = ip->letterbox_w;
+		uint32_t lh = ip->letterbox_h;
+		uint32_t ww = ip->window_w - 2*lw;
+		uint32_t wh = ip->window_h - 2*lh;
 		switch (ev.type) {
 		case SDL_QUIT:
 			//TODO: find a sane way to implement this
@@ -43,7 +76,7 @@ bool Input::poll(InputEvent* event) {
 				event->type = CiType::RELEASE;
 				axis_dir = 0;
 			}
-			CiButton button = priv->keymap[ev.key.keysym.scancode];
+			button = priv->keymap[ev.key.keysym.scancode];
 			if (button != 0) {
 				event->value.button = button;
 				return true;
@@ -84,6 +117,40 @@ bool Input::poll(InputEvent* event) {
 				priv->x_tmp = 1;
 				return true;
 			}
+		break;
+		case SDL_MOUSEMOTION:
+			if (ev.motion.x < lw || ev.motion.y < lh
+					|| ev.motion.x > lw+ww || ev.motion.y > lh+wh)
+				return poll(event);
+			// encoding: 2 uint16 (0..0xffff)
+			x = ((float)(ev.motion.x-lw)) / ((float)ww);
+			y = ((float)(ev.motion.y-lh)) / ((float)wh);
+			event->type = CiType::MOUSE;
+			event->value.raw = ((uint32_t)(x*0xffff)) | (((uint32_t)(y*0xffff))<<16);
+			return true;
+		break;
+		case SDL_MOUSEWHEEL:
+			button = ciButton(ev.wheel);
+			if (button == 0)
+				continue;
+			event->type = CiType::PRESS;
+			event->value.button = button;
+			return true;
+		break;
+		case SDL_MOUSEBUTTONDOWN:
+			event->type = CiType::PRESS;
+			button = ciButton(ev.button);
+			if (button == 0)
+				continue;
+			return true;
+		break;
+		case SDL_MOUSEBUTTONUP:
+			event->type = CiType::RELEASE;
+			button = ciButton(ev.button);
+			if (button == 0)
+				continue;
+			return true;
+		break;
 		}
 	}
 	//queue empty

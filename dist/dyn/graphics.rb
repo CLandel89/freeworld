@@ -83,6 +83,13 @@ class Graphics
     @mi += (encode_i32 y)
   end
 
+  def draw_sprite_frac sprite_id, x,y,w,h
+    draw_sprite_raw sprite_id, x*@res_w,y*@res_h,w,h
+  end
+  def draw_sprite_frac_c sprite_id, x,y,w,h
+    draw_sprite_raw sprite_id, x*@res_w-w/2,y*@res_h-h/2,w,h
+  end
+
   def draw_wall_raw wall_id, x, y, w, h, offset_x, offset_y
     return if x+w<0 || y+h<0 || x>@res_w || y>@res_h
     @mi += (encode_i32 Mi::WALL) +
