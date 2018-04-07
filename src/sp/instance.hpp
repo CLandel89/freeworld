@@ -30,6 +30,7 @@ public:
 	~InstanceSp();
 	void start(std::string world, std::vector<std::string> vm_pkgs, std::vector<std::string> media_pkgs);
 	void stop();
+	void finish();
 };
 
 } // end of namespace Freeworld

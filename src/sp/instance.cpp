@@ -102,4 +102,8 @@ void InstanceSp::stop() {
 	mpsSp->stop();
 }
 
+void InstanceSp::finish() {
+	mpsSp->finish();
+}
+
 } // end of namespace Freeworld

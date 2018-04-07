@@ -53,15 +53,14 @@ bool Input::poll(InputEvent* event) {
 		CiButton button;
 		float x, y;
 		auto& ip = integration->priv;
+		auto& instance = integration->instance;
 		uint32_t lw = ip->letterbox_w;
 		uint32_t lh = ip->letterbox_h;
 		uint32_t ww = ip->window_w - 2*lw;
 		uint32_t wh = ip->window_h - 2*lh;
 		switch (ev.type) {
 		case SDL_QUIT:
-			//TODO: find a sane way to implement this
-			std::cout << "Received SDL_QUIT. Shutting down, but not softly (implement me!).\n";
-			std::exit(0);
+			instance->finish();
 			break;
 		case SDL_KEYDOWN:
 		case SDL_KEYUP:

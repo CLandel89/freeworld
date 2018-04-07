@@ -21,7 +21,7 @@ class Instance
 
   def main
     frame_time = 1.0 / FPS
-    while true
+    while !CoreUtils.finished
       @players.each do |p|
         $chunk_manager.action
         p.action
@@ -40,6 +40,7 @@ class Instance
       #TODO: implement constant frame rate
       CoreUtils.sleep frame_time
     end
+    debug 'Finished main loop.'
   end
 
   def space_RL entity

@@ -24,10 +24,12 @@ public:
 	CoreUtils* core_utils;
 	Database* database;
 	Integration::IntegrationMpsSp* integration;
+	bool finished = false;
 	InstanceMpsSp(InstanceMps* mps, InstanceSp* sp);
 	~InstanceMpsSp();
 	void start(std::vector<std::string> pkgs);
 	void stop();
+	void finish();
 };
 
 } // end of namespace Freeworld

@@ -119,5 +119,9 @@ void InstanceMpsSp::stop() {
 	integration->quit();
 }
 
+void InstanceMpsSp::finish() {
+	finished = true;
+}
+
 } //end of namespace Freeworld
 

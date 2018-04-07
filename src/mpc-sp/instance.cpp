@@ -25,4 +25,8 @@ void InstanceMpcSp::stop() {
 	integration->quit();
 }
 
+void InstanceMpcSp::finish() {
+	if (sp!=NULL) sp->finish();
+}
+
 } // namespace Freeworld

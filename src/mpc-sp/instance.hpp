@@ -24,6 +24,7 @@ public:
 	~InstanceMpcSp();
 	void start(std::vector<std::string> pkgs);
 	void stop();
+	void finish();
 };
 
 } // namespace Freeworld

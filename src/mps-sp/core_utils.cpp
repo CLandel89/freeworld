@@ -72,6 +72,14 @@ mrb_value string_hash_func (mrb_state* vm, mrb_value self) {
 	return result;
 }
 
+/** @brief Exports InstanceMpsSp::finished to MRuby. */
+mrb_value finished_int_func (mrb_state* vm, mrb_value self) {
+	mrb_value result;
+     result.value.i = vm_instance_map[vm]->finished;
+	result.tt = MRB_TT_FIXNUM;
+	return result;
+}
+
 // exported definitions
 
 CoreUtils::CoreUtils(InstanceMpsSp* instance)
@@ -87,6 +95,7 @@ void CoreUtils::init() {
 	mrb_define_class_method(vm, core_utils_class, "add_enum", &add_enum_func, MRB_ARGS_ARG(2,0));
 	mrb_define_class_method(vm, core_utils_class, "sleep", &sleep_func, MRB_ARGS_ARG(1,0));
 	mrb_define_class_method(vm, core_utils_class, "string_hash", &string_hash_func, MRB_ARGS_ARG(1,0));
+	mrb_define_class_method(vm, core_utils_class, "finished_int", &finished_int_func, MRB_ARGS_ARG(0,1));
 }
 
 void CoreUtils::quit() {
