@@ -29,6 +29,8 @@ IntegrationMpcSp::IntegrationMpcSp(InstanceMpcSp* instance) {
 }
 
 IntegrationMpcSp::~IntegrationMpcSp() {
+	delete video;
+	delete input;
 	delete priv;
 }
 

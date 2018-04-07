@@ -11,6 +11,7 @@ InstanceMpcSp::InstanceMpcSp(InstanceMpc* mpc, InstanceSp* sp)
 }
 InstanceMpcSp::~InstanceMpcSp() {
 	delete media_manager;
+	delete integration;
 }
 
 void InstanceMpcSp::start(std::vector<std::string> pkgs) {
