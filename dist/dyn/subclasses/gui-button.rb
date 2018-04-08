@@ -1,13 +1,24 @@
 class GuiButton < GuiElement
+  attr_accessor :br, :bg, :bb
+  attr_accessor :dr, :dg, :db
+  attr_accessor :dm, :dt
+
   def initialize
     super
     @hooks = Array.new
+    #grey background
+    self.br = self.bg = self.bb = 0x80
+    #black decoration
+    self.dr = self.dg = self.db = 0
+    #decoration margin
+    self.dm = 25
+    #decoration thickness
+    self.dt = 5
   end
 
   def draw_impl
-    self.fill_rect 0,0,1,1, 0x80,0x80,0x80
-    dm = 25
-    self.decorate dm,dm,dm,dm, 0,0,0, 5
+    self.fill_rect 0,0,1,1, self.br,self.bg,self.bb
+    self.decorate self.dm,self.dm,self.dm,self.dm, self.dr,self.dg,self.db, self.dt
   end
 
   def enter
