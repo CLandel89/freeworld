@@ -8,7 +8,7 @@ class InstanceSp < Instance
 end
 
 def start_instance_sp world
-  InstanceSp.new
+  instance = InstanceSp.new
   Database.open_world world
   wp = 'std'
   wn = 'fence_grey_ugly'
@@ -21,9 +21,10 @@ def start_instance_sp world
   #horizontal gap of 20
 #  w5 = Wall.new_jpg 200,200,1200,1200, wp,wn
 #  puts "#{w1} #{w2} #{w3} #{w4} #{w5}"
-#  $chunk_manager << w1 << w2 << w3 << w4 << w5
-  #$chunk_manager << w5
-#  $chunk_manager.load 0,0,0
+#  chunk_manager = instance.chunk_manager
+#  chunk_manager << w1 << w2 << w3 << w4 << w5
+  #chunk_manager << w5
+#  chunk_manager.load 0,0,0
   # Here be dragons!
-  $instance.main
+  instance.main
 end

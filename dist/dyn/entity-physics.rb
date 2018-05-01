@@ -26,7 +26,7 @@ module EntityPhysics
   end
 
   #returns true if entity is stuck
-  def ep_action
+  def ep_action instance
     # apply force
     self.em_sx = (@ep_fx/4).to_i
     self.em_sy = (@ep_fy/4).to_i
@@ -34,7 +34,7 @@ module EntityPhysics
     @ep_fx -= self.em_sx
     @ep_fy -= self.em_sy
     # delegate to lower layer
-    result = em_action
+    result = em_action instance
     # bump
     if @ep_fx > 0 && self.em_bumpr != nil
       @ep_fx = 0

@@ -5,6 +5,7 @@ end
 class Instance
 
   attr_accessor :players
+  attr_accessor :option_manager, :chunk_manager
   attr_reader :entity_layer_list
 
   FPS = 35.0
@@ -13,23 +14,21 @@ class Instance
 
   def initialize
     @players = []
-    #global references
-    $instance = self
-    $option_manager = OptionManager.new
-    $chunk_manager = ChunkManager.new
+    @option_manager = OptionManager.new
+    @chunk_manager = ChunkManager.new self
   end
 
   def main
     frame_time = 1.0 / FPS
     while !CoreUtils.finished
       @players.each do |p|
-        $chunk_manager.action
-        p.action
+        chunk_manager.action self
+        p.action self
         g = p.graphics
         #draw blue sky
         g.fill_rect_raw 0,0,g.res_w,g.res_h, 0,255,255
         #draw entities
-        $chunk_manager.each_entity proc {|e| g.draw e}
+        chunk_manager.each_entity proc {|e| g.draw e}
         #draw player
         g.draw p
         #draw UI
@@ -46,7 +45,7 @@ class Instance
   def space_RL entity
     rs,ls = MAXNUM,MAXNUM
     re,le = nil,nil
-    $chunk_manager.each_entity proc { |e2|
+    chunk_manager.each_entity proc { |e2|
       if e2.solid
         rd,ld = entity.distance_RL e2
         if rd < rs
@@ -65,7 +64,7 @@ class Instance
   def space_DU entity
     ds,us = MAXNUM,MAXNUM
     de,ue = nil,nil
-    $chunk_manager.each_entity proc { |e2|
+    chunk_manager.each_entity proc { |e2|
       if e2.solid
         dd,ud = entity.distance_DU e2
         if dd < ds

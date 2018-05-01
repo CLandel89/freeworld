@@ -55,9 +55,9 @@ class Chunk
 
   #check if the chunk has an intersection with the
   #given rectangle and is in "z"
-  def in? x1,y1,x2,y2,z
+  def in? instance, x1,y1,x2,y2,z
     return false if @z!=z
-    csize = $option_manager['chunk size'].to_i
+    csize = instance.option_manager['chunk size'].to_i
     if @x+csize>=x1  and
         @x<=x2       and
         @y+csize>=y1 and

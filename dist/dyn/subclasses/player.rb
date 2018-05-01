@@ -16,12 +16,12 @@ class Player < Entity
     @squashed = false
   end
 
-  def action
+  def action instance
     @control.action
     #in case you want to test the squashing effect
 #    @x += @control.x
 #    @y += @control.y
-    @squashed = ev_action
+    @squashed = ev_action instance
     @frame_counter += 1
     #smooth look-ahead and player in center approximation
     @la_x = (@la_x*7 + @em_sx*8) / 8

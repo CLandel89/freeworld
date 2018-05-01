@@ -28,14 +28,14 @@ module EntityVertical
   end
 
   #returns true if entity is stuck
-  def ev_action
+  def ev_action instance
     if (self.respond_to? :gui) && self.gui.shown
       c = @control_dummy
     else
       c = self.control
     end
 	# on ground or mid-air?
-    ds,us,de,ue = $instance.space_DU self
+    ds,us,de,ue = instance.space_DU self
     if ds<=2
       # on ground
       if c.b[CiButton::JUMP] && !@jumped
@@ -64,7 +64,7 @@ module EntityVertical
 	end
     # run/fly
     self.ep_fx += @ev_runspeed * c.x
-    result = ep_action
+    result = ep_action instance
     return result
   end
 

@@ -1,7 +1,8 @@
 class ChunkManager
   attr_accessor :chunks
 
-  def initialize
+  def initialize instance
+    option_manager = instance.option_manager
     @chunks = []
     # chunk distances:
     #Whenever there are chunks missing in the
@@ -9,22 +10,22 @@ class ChunkManager
     #"chunk load distance" are ensured loaded.
     #When a chunk is outside the "chunk max distance"
     #of every player, it is unloaded.
-    @min_d = $option_manager['chunk min distance'].to_i
-    @load_d = $option_manager['chunk load distance'].to_i
-    @max_d = $option_manager['chunk max distance'].to_i
-    @csize = $option_manager['chunk size'].to_i
+    @min_d = option_manager['chunk min distance'].to_i
+    @load_d = option_manager['chunk load distance'].to_i
+    @max_d = option_manager['chunk max distance'].to_i
+    @csize = option_manager['chunk size'].to_i
   end
 
-  def action
+  def action instance
     @chunks.each do |chunk|
       in_max_d = false
-      $instance.players.each do |player|
+      instance.players.each do |player|
         z = player.z
         x1 = player.x - @max_d
         y1 = player.y - @max_d
         x2 = player.x + player.w + @max_d
         y2 = player.y + player.h + @max_d
-        if chunk.in? x1,y1,x2,y2,z
+        if chunk.in? instance, x1,y1,x2,y2,z
           in_max_d = true
           break
         end
@@ -35,7 +36,7 @@ class ChunkManager
       end
     end
     players_load_d = []
-    $instance.players.each do |player|
+    instance.players.each do |player|
       start_x = x = c_coor(player.x - @min_d)
       end_x = c_coor(x + 2*@min_d + @csize)
       y = c_coor(player.y - @min_d)

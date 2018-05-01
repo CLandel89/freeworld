@@ -16,13 +16,13 @@ module EntityMoving
   end
 
   #returns true if entity is stuck
-  def em_action
+  def em_action instance
     @em_bumpl = @em_bumpr = @em_bumpu = @em_bumpd = nil
-    ds,us,de,ue = $instance.space_DU self
+    ds,us,de,ue = instance.space_DU self
     if ds<0 or us<0
       return true
     end
-    rs,ls,re,le = $instance.space_RL self
+    rs,ls,re,le = instance.space_RL self
     if rs<0 or ls<0
       return true
     end
@@ -45,7 +45,7 @@ module EntityMoving
       end
     end
     #we need to calculate this again, because moving on the x axis might have changed the situation
-    ds,us,de,ue = $instance.space_DU self
+    ds,us,de,ue = instance.space_DU self
     if @em_sy > 0
       if @em_sy < ds
         @y += @em_sy
