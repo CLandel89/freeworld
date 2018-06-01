@@ -20,12 +20,6 @@ class Instance
 
   def main
     frame_time = 1.0 / FPS
-    hello = Text.new(@players[0].graphics, 'std', 'clip-art-blue-big', 150, 200)
-    hello << (('a'.ord)..('z'.ord))
-    hello << (('A'.ord)..('Z'.ord))
-    desc = Text.new(@players[0].graphics, 'std', 'clip-art-blue', 75, 100)
-    desc << (('a'.ord)..('z'.ord))
-    desc << (('A'.ord)..('Z'.ord))
     while !CoreUtils.finished
       @players.each do |p|
         chunk_manager.action self
@@ -39,13 +33,6 @@ class Instance
         g.draw p
         #draw UI
         p.gui.draw
-        #test, delete me
-        hello.draw 500,250, 'Hello, world!'
-        desc_text = 'This is a longer text with a smaller font.'
-        desc_text += "\nThis is a second line."
-        desc_text += "\nAnd a third line."
-        desc_text += "\nThat should be enough for now :)"
-        desc.draw 50,750, desc_text
         #that's all, folks!
         g.complete_frame
       end
