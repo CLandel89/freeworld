@@ -6,3 +6,4 @@
  - distance aus Instance nach ChunkManager
  - soft shutdown
  - entity-layers (was oberhalb von anderen angezeigt wird)
+ - RELEASE-define und evtl. Versionierung, siehe Step1 hier: [`CMake Tutorial`](https://cmake.org/cmake-tutorial/)
