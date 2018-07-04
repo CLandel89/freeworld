@@ -32,7 +32,7 @@ class Instance
         #draw player
         g.draw p
         #draw UI
-        p.gui.draw
+        p.main_menu.draw
         #that's all, folks!
         g.complete_frame
       end

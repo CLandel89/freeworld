@@ -11,7 +11,7 @@ class GuiElement
     # state
     @shown = true
     @children = Array.new
-    @selected = 0
+    @selected = nil
     #submenus (children) need to know when they should
     #accept input
     @focussed = false
@@ -71,16 +71,19 @@ class GuiElement
     case ci_t
     when CiType::PRESS
       case ci_v
-      when CiButton::JUMP
+      when CiButton::JUMP, CiButton::MOUSEL
         # enter selected element
-        se = self.children[self.selected]
-        #se.enter if se!=nil && se.respond_to? :enter
+        if self.selected!=nil
+          se = self.children[self.selected]
+          se.enter if (se.respond_to? :enter)
+	end
       end
     when CiType::MOUSE
       #select a child, if selection is implemented and the
       #mouse is hovering over a child
       px = ci_v[0]
       py = ci_v[1]
+      self.selected = nil
       self.children.each_with_index do |c,i|
         if px>=c.x && px<=c.x+c.sx && py>=c.y && py<=c.y+c.sy
           self.selected=i
