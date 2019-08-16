@@ -1,3 +1,5 @@
+module BinUtils; end #empty definition to avoid NameError
+
 class Chunk
   include BinUtils
 
