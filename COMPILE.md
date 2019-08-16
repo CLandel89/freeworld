@@ -1,20 +1,54 @@
-# Dependencies
-To compile, you need the following libs:
-    sdl2
-    sdl2_image
-    sdl2_gfx
-    boost
-Please make sure to use sane sources. E.g., on Debian, you would use `apt-get install libsdl2-dev`. On Windows, you would download the packages from their authors and - W.I.P. - integrate them into my project.
+# Compiling and running
+
+Please go through this guide step-by-step if you wish to run Freeworld.
+Change paths and improvize, whenever needed; report unexpected problems as GitHub Issues :)
+Not tested under Windows (only Linux, so far).
 
 ## mruby
-Since I'd like to stick to a specific version of mruby, it is included as a git submodule. To fetch it, execute the following in the project root dir (Windows users might need to use 'open git bash shell here' or similar from the context menu in the file browser):
+
+Freeworld uses [mRuby](http://mruby.org) as the scripting engine.
+Since I'd like to stick to a specific version of mRuby, it is included as a git submodule. To fetch it, execute the following GIT commands (in the project root dir):
 ```
+cd /path/to/repo
 git submodule init
 git submodule update
 ```
-Then try to compile mruby:
+
+mRuby has some dependencies:
+ * ruby
+ * bison
+ * a C compiler (gcc or clang)
+
+Compile mRuby:
 ```
+cd /path/to/repo
 cd ext/mruby
 ./minirake
 ```
 If that fails, look at the documentation in `ext/mruby`.
+
+## other libraries and tools
+
+Before compiling Freeworld, you need the following:
+ * cmake-gui (or cmake)
+ * sdl2
+ * sdl2\_image
+ * sdl2\_gfx
+ * boost
+Please make sure to use sane sources. E.g., on Ubuntu, you would install `sdl2` with `sudo apt install libsdl2-dev`.
+
+## compilation
+
+Create a build directory and compile Freeworld (command line / Linux):
+```
+mkdir ~/fw-build
+cd ~/fw-build
+cmake-gui /path/to/repo
+#(Choose your build environment and generate the build directory (~/fw-build).)
+make #or other command for the specified build environment
+```
+
+## running Freeworld
+
+The compilation result should be in `/path/to/repo/dist`.
+Run the script `/path/to/repo/freeworld-sp`; inspect it if anything goes wrong.
