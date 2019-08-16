@@ -42,6 +42,15 @@ void rec_load(mrb_state* vm, boost::filesystem::path path)
 			FILE* script_file = fopen (iter->path().c_str(), "r");
 			mrb_load_file(vm, script_file);
 			fclose(script_file);
+			//https://stackoverflow.com/a/21844391
+			if (vm->exc) {
+				mrb_print_backtrace(vm);
+				mrb_print_error(vm);
+				throw std::string(
+						"Script execution ("
+						+ filename
+						+ ") failed, an error description should have been printed above.");
+			}
 #ifndef RELEASE
 			mrb_load_string(vm, "puts 'ok'\n");
 #endif
