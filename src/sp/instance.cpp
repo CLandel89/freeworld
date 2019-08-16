@@ -94,7 +94,18 @@ void InstanceSp::start(std::string world, std::vector<std::string> vm_pkgs, std:
 	priv->init_mi_parser(vm);
 	priv->init_ci_poller(vm);
 	//instruct the MRuby module to start and load the world
-	mrb_load_string(vm, ("start_instance_sp '" + world + "'").c_str());
+	mrb_load_string(
+		vm,
+		(
+			"begin\n"
+			"  start_instance_sp '" + world + "'\n"
+			"rescue => exn\n"
+			"  puts 'An exception occurred during start_instance_sp!'\n"
+			"  puts exn.backtrace.join '\\n'\n"
+			"  puts exn\n"
+			"end\n"
+		).c_str()
+	);
 }
 
 void InstanceSp::stop() {
